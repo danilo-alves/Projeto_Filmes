@@ -33,6 +33,7 @@
 					abort;
 				}
 
+				// Redirecionar para a pagina de Filmes a adicionar
 				//location(url="index.cfm");
 			}
 		}
