@@ -34,26 +34,29 @@
 	    <!-- Campo de busca  -->
 	    <div class="row" align="center">
 	    	<div class="span12">    		
-		    	<form class="form-search">
-		    		<input type="text" class="input-xxlarge search-query" placeholder="Buscar Filmes, S&eacute;ries...">
-		    		<button type="submit" class="btn"><i class="icon-search"></i></button>
-		    	</form>		    
+		    	<cfform class="form-search">
+					<cfset i = 0>
+					<cfset filmeData = ''>
+					<cfset filmes = entityLoad('Filme')>
+					<cfloop condition="i LT ArrayLen(filmes)">                                
+                       	<cfset i = i + 1>                                
+                        <cfset filmeData = filmeData & ",&quot;" & #filmes[i].getTitulo()# & "&quot;">                                
+                    </cfloop>
+		    		<cfinput name="txtSearch" type="text" class="input-xxlarge search-query" placeholder="Buscar Filmes, S&eacute;ries..." datasource="[#filmeData#]">
+		    		<button name="submit" type="submit" class="btn"><i class="icon-search"></i></button>
+		    	</cfform>		    
 	    	</div>
 	    </div>
 	    <hr>
+		<cfif isDefined('form.submit')>
+			<cfset result = ORMSearch('form.txtSearch', 'Filme', [ "Titulo" ])>
+			<cfdump var="#result#">
+		</cfif>
 	    
 	    <!-- Corpo do site  -->
 	    <div class="row">
 	    	<!-- spanN em que N se refere ao numero de colunas, Maximo de 12 colunas -->
-	    	<div class="span2 muted">
-	    		<ul class="nav nav-list">
-	    			<li class="nav-header">Op&ccedil;&otilde;es</li>
-	    			<li class="active"><a href="#">Adicionar Filme</a></li>
-	    			<li><a href="#">Meus Filmes</a></li>
-	    			<li><a href="#">Meus Perfil</a></li>
-	    			<li><a href="#">Sair</a></li>
-	    		</ul>
-	    	</div>
+	    	<cfinclude template="MenuBar.cfm"> <!--- Inclui a barra de menus --->
 	    	<div class="span10" style="background-color: gray">
 	    		<h4>Coluna Direita</h4>
 	    		<img src="" class="img-rounded">	

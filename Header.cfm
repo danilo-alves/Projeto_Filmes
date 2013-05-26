@@ -14,7 +14,9 @@
     <!-- CSS para layout responsive -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
-	
+	<!--- Star Rating - http://wbotelhos.com/raty/ --->
+	<script type="text/javascript" src="assets/lib/jquery.raty.min.js"></script>
+	<script type="text/javascript" src="assets/js/jquery.min.js"></script>
   </head>
   <body>
   	
@@ -40,7 +42,17 @@
 	  				<li class="divider-vertical"></li><!-- linha vertical divisora-->
 	  				<li class="active"><a href="#">Home</a></li>
 	  				
-	  				<li><a href="#">Filmes</a></li>
+	  				<li>
+						<!-- Label do dropdown -->
+		  					<a href="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown">
+		  						Filmes
+		  					</a>
+		  					
+		  					<!-- Opção do dropdown -->
+		  					<ul class="dropdown-menu" aria-labellely="dlabel">
+		  						<li><a href="#">Ação</a></li>
+		  						<li><a href="#">Comédia</a></li>
+		  					</ul></li>
 	  				
 	  				<li><a href="#">S&eacute;ries</a></li>
 	  				

@@ -17,6 +17,10 @@ como OnRequestStart(), OnSessionStart() --->
 	<!---// Configuração que indica que qualquer estrutura do banco 
 	// quando modifcada nos arquivos cfc atualiza no banco de dados--->
 	<cfset this.ormSettings.dbcreate = "update">
+	<cfset this.ormSettings.searchEnabled = "true">
+	<cfset this.ormSettings.Search.autoindex = "true">
+	<cfset this.ormSettings.indexdir = getDirectoryFromPath(getCurrentTemplatePath())&"/ormindex">
+	<cfset this.ormSettings.search.language = "Portuguese">
 	
 	<!---Métodos --->
 	<!---Método executado a cada nova requisição de página  --->

@@ -1,4 +1,4 @@
-﻿<cfcomponent name="Grupo" persistent="true" table="tbl_Genero">
+﻿<cfcomponent name="Grupo" persistent="true" table="tbl_Grupo">
 	<cfproperty name="Id_Grupo" fieldtype="id" generator="identity" type="numeric" ormtype="int">
 	<cfproperty name="Id_Usuario" fieldtype="many-to-one" cfc="Usuario" fkcolumn="Id_Usuario"><!--- chave estrangeira --->
 	<cfproperty name="Nome_Grupo" fieldtype="column" type="string" sqltype="VARCHAR(100)" required="true" ormtype="string">
