@@ -57,9 +57,18 @@
 	    <div class="row">
 	    	<!-- spanN em que N se refere ao numero de colunas, Maximo de 12 colunas -->
 	    	<cfinclude template="MenuBar.cfm"> <!--- Inclui a barra de menus --->
-	    	<div class="span10" style="background-color: gray">
-	    		<h4>Coluna Direita</h4>
-	    		<img src="" class="img-rounded">	
+	    	<div class="span10">
+	    		<ul class="thumbnails">
+	    			<cfloop index="i" from="1" to="10">
+					  <li class="span3">
+					    <div class="thumbnail">
+					      <a class="thumbnail" href="#"><img data-src="holder.js/260x180" alt=""></a>
+						  <h5>Thumbnail label</h5>
+	      					<p>Thumbnail caption...</p>
+					    </div>
+					  </li>	
+					 </cfloop>
+				 </ul>
 	    	</div>
 	    </div>
 

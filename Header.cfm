@@ -50,8 +50,12 @@
 		  					
 		  					<!-- Opção do dropdown -->
 		  					<ul class="dropdown-menu" aria-labellely="dlabel">
-		  						<li><a href="#">Ação</a></li>
-		  						<li><a href="#">Comédia</a></li>
+		  						<cfquery name="getGeneros" datasource="ds_Projeto_Filmes">
+									SELECT Id_Genero, Descricao FROM tbl_Genero
+								</cfquery>
+								<cfloop query="getGeneros" endRow="10">
+										<li><a href=""><cfoutput>#Descricao#</cfoutput></a></li>
+								</cfloop>
 		  					</ul></li>
 	  				
 	  				<li><a href="#">S&eacute;ries</a></li>

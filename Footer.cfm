@@ -13,5 +13,6 @@
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="assets/js/bootstrap.js"></script>
 	<script src="http://cdn.alloyui.com/2.0.0pr5/aui/aui-min.js"></script>
+	<script src="assets/js/holder.js"></script>
   </body>
 </html>

@@ -44,8 +44,11 @@ como OnRequestStart(), OnSessionStart() --->
 	                </cfoutput> 
 	                <!---<cfabort>---> 
 	            <cfelse> 
+					<!--- Criptgrafa a senha para comparação --->
+					<cfset senhaCripto=HASH(cflogin.password, "SHA-1")>
+					
 	                <!--- Busca na tabela Usuario um usuario com os dados fornecidos em j_username e com senha j_password --->
-	                <cfset loginUserData = entityLoad('Usuario', {Email='#cflogin.name#', Senha="#cflogin.password#"})>
+	                <cfset loginUserData = entityLoad('Usuario', {Email='#cflogin.name#', Senha="#senhaCripto#"})>
 					
 					<!--- Verifica se houve algum registro retornado --->
 	                <cfif arraylen(loginUserData) NEQ 0> 

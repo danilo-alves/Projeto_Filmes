@@ -12,7 +12,8 @@
 			novoUsuario = entityNew('Usuario');
 			novoUsuario.setNOME(form.inputNome);
 			novoUsuario.setEMAIL(form.inputEmail);
-			novoUsuario.setSENHA(form.inputSenha);
+			/* Guarda a senha criptografa com SHA-1 */
+			novoUsuario.setSENHA(HASH(form.inputSenha, "SHA-1"));
 			
 			entitySave(novoUsuario);
 			
