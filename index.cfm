@@ -49,17 +49,59 @@
 	    </div>
 	    <hr>
 		<cfif isDefined('form.submit')>
-			<cfset result = ORMSearch('form.txtSearch', 'Filme', [ "Titulo" ])>
-			<cfdump var="#result#">
+			<cfset resultSearch = ORMSearch('#form.txtSearch#*', "Filme", [ "Titulo" ])>
 		</cfif>
 	    
 	    <!-- Corpo do site  -->
 	    <div class="row">
-	    	<!-- spanN em que N se refere ao numero de colunas, Maximo de 12 colunas -->
-	    	<cfinclude template="MenuBar.cfm"> <!--- Inclui a barra de menus --->
-	    	<div class="span10">
+	    	
+			<!--- Verifica se o usuário esta logado e oculta a barra de opcoes caso o usuário não esteja logado --->
+	    	<cfif GetAuthUser() NEQ "">
+				<cfset spanNum = "span10">
+				<!-- spanN em que N se refere ao numero de colunas, Maximo de 12 colunas -->
+	    		<cfinclude template="MenuBar.cfm"> <!--- Inclui a barra de menus --->
+			<cfelse>
+				<cfset spanNum = "span12">
+	    	</cfif>
+	    		
+	    		<cfif isDefined('form.submit')>
+		    		<cfoutput><div class="#spanNum#"></cfoutput>
+		    		<hr>
+					<h4>Você procurou por "<cfoutput>#form.txtSearch#</cfoutput>"</h4>
+		    		<ul class="thumbnails">
+						 
+						<!---<cfdump var="#ultimosFilmes#">--->
+		    			<cfloop index="filmeRes" array="#resultSearch.data#">
+							<cfset filme = filmeRes.entity>
+							
+							<cfset imgCapa = entityLoad('Imagem', {Id_Filme=filme}, true) />	
+						  	<li class="span3">
+						    	<div class="thumbnail">
+						    		<cfoutput>
+						      			<a class="thumbnail" href="InfoFilme.cfm?Id=#filme.getId_Filme()#">
+						      				<cfset imgPath = #imgCapa.getImagem_Path()#>
+													  
+						      				<!--- Carrega a imagem --->
+											<cfif isDefined('imgPath') || isNull(imgPath) >
+												<cfimage action="writeToBrowser" source="#imgCapa.getImagem_Path()#" height="50%" width="50%">
+											<cfelse>
+												<img data-src="holder.js/260x160">
+											</cfif>
+						      			</a>
+							  			<h5>#filme.getTitulo()#</h5>
+		      							<p>#Mid(filme.getSinopse(), 1, 15)#...</p>
+									</cfoutput>
+						    	</div>
+						  	</li>	
+						 </cfloop>
+					 </ul>
+		    		</div>
+				</cfif>
+	    		
+	    		<cfoutput><div class="#spanNum#"></cfoutput>
+	    		<hr>
+				<h4>Ultimos Filmes</h4>
 	    		<ul class="thumbnails">
-	    			
 					<!--- Carrega os ultimos filmes adicionados --->
 					<cfset ultimosFilmes = EntityLoad('Filme', {}, "Data_Adicao Asc") > 
 					<!---<cfdump var="#ultimosFilmes#">--->
