@@ -1,8 +1,8 @@
 ﻿<cfcomponent entityName="Usuario" persistent="true" table="tbl_Usuario">
 	<!---// Campo de identificacao que gera os Ids automaticamente--->
-	<cfproperty name="Id_cliente" fieldtype="id" generator="identity" type="numeric" ormtype="int">
+	<cfproperty name="Id_Usuario" fieldtype="id" generator="identity" type="numeric" ormtype="int">
 	<cfproperty name="Nome" type="string" sqltype="VARCHAR(100)" required="true" ormtype="string">
- 	<cfproperty name="Email" type="string" sqltype="VARCHAR(100)" required="true" ormtype="string">
+ 	<cfproperty name="Email" type="string" sqltype="VARCHAR(100)" required="true" ormtype="string" unique="true">
 	<cfproperty name="Senha" type="string" required="true">
 	
 	<!---Relacionamento muito para muitos --->

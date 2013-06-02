@@ -59,14 +59,30 @@
 	    	<cfinclude template="MenuBar.cfm"> <!--- Inclui a barra de menus --->
 	    	<div class="span10">
 	    		<ul class="thumbnails">
-	    			<cfloop index="i" from="1" to="10">
-					  <li class="span3">
-					    <div class="thumbnail">
-					      <a class="thumbnail" href="#"><img data-src="holder.js/260x180" alt=""></a>
-						  <h5>Thumbnail label</h5>
-	      					<p>Thumbnail caption...</p>
-					    </div>
-					  </li>	
+	    			
+					<!--- Carrega os ultimos filmes adicionados --->
+					<cfset ultimosFilmes = EntityLoad('Filme', {}, "Data_Adicao Asc") > 
+					<!---<cfdump var="#ultimosFilmes#">--->
+	    			<cfloop index="filme" array="#ultimosFilmes#">
+						<cfset imgCapa = entityLoad('Imagem', {Id_Filme=filme}, true) />	
+					  	<li class="span3">
+					    	<div class="thumbnail">
+					    		<cfoutput>
+					      			<a class="thumbnail" href="InfoFilme.cfm?Id=#filme.getId_Filme()#">
+					      				<cfset imgPath = #imgCapa.getImagem_Path()#>
+												  
+					      				<!--- Carrega a imagem --->
+										<cfif isDefined('imgPath') || isNull(imgPath) >
+											<cfimage action="writeToBrowser" source="#imgCapa.getImagem_Path()#" height="50%" width="50%">
+										<cfelse>
+											<img data-src="holder.js/260x160">
+										</cfif>
+					      			</a>
+						  			<h5>#filme.getTitulo()#</h5>
+	      							<p>#Mid(filme.getSinopse(), 1, 15)#...</p>
+								</cfoutput>
+					    	</div>
+					  	</li>	
 					 </cfloop>
 				 </ul>
 	    	</div>

@@ -5,37 +5,62 @@
 <cfparam name="form.inputEmail" default="">
 <cfparam name="form.unputSenha" default="">
 
+<!--- Avisos para os campso do formulário --->
+<cfparam name="emailError" default="">
+<cfparam name="passwordError" default="">
+
 <cfscript>
 	try {
 		if (isDefined('form.btnCadastrar'))
 		{
-			novoUsuario = entityNew('Usuario');
-			novoUsuario.setNOME(form.inputNome);
-			novoUsuario.setEMAIL(form.inputEmail);
-			/* Guarda a senha criptografa com SHA-1 */
-			novoUsuario.setSENHA(HASH(form.inputSenha, "SHA-1"));
+			emailUser = entityLoad('Usuario', {Email="#form.inputEmail#"});
 			
-			entitySave(novoUsuario);
-			
-			aviso = "<div class='alert alert-success'><h3>Sucesso!</h1><p>#form.inputNome# foi criado com sucesso</p></div>"; 
-			
-			// Cria uma pasta com o nome do usuário
-			basePath = ExpandPath("./");
-			newDirectory = "#form.inputNome#";
-			newDirectoryPath =  "#basePath#" & "#newDirectory#";
-			if(NOT DirectoryExists(newDirectoryPath))
-			{
-				try {
-					DirectoryCreate(newDirectoryPath);
-					/*FileCopy('#basePath#index_sample.cfm', '#newDirectoryPath#/index.cfm');*/
+			// Verifica se ja existe um email cadastrado igual ao informado 
+			if(arrayLen(emailUser) NEQ 0){
+				emailError="error";
+			}
+			else{
+				// Verifica se ambas as senhas são iguais
+				if(form.inputSenha NEQ form.inputSenha2){
+					passwordError="error";
 				}
-				catch(Exception ex) {
-					WriteOutput("<div class='alert alert-error'><h1>Erro!</h1><p>#ex.message#</p></div>");
-					abort;
+				else{
+					novoUsuario = entityNew('Usuario');
+					novoUsuario.setNOME(form.inputNome);
+					novoUsuario.setEMAIL(form.inputEmail);
+					/* Guarda a senha criptografa com SHA-1 */
+					novoUsuario.setSENHA(HASH(form.inputSenha, "SHA-1"));
+					
+					entitySave(novoUsuario);
+					// obtem o id do novo usuário para utilizar na criaçao do diretório
+					userId = novoUsuario.getId_Usuario();
+					
+					aviso = "<div class='alert alert-success'><h3>Sucesso!</h3><p>#form.inputNome# foi criado com sucesso</p></div>"; 
+					
+					// Cria uma pasta com o nome do usuário
+					basePath = ExpandPath("./UserData/");
+					newDirectory = "USER#userID#";
+					newDirectoryPath =  "#basePath#" & "#newDirectory#";
+					if(NOT DirectoryExists(newDirectoryPath))
+					{
+						try {
+							DirectoryCreate(newDirectoryPath);
+							/*FileCopy('#basePath#index_sample.cfm', '#newDirectoryPath#/index.cfm');*/
+						}
+						catch(Exception ex) {
+							WriteOutput("<div class='alert alert-error'><h1>Erro!</h1><p>#ex.message#</p></div>");
+							abort;
+						}
+		
+						// Redirecionar para a pagina de Filmes a adicionar
+						//location(url="index.cfm");
+						
+						// verifca se ha uma pagina anterior definida pelo GET para redimensionar apos o cadastro ser efetuado 
+						if(isDefined(url.prevPage)){
+							location(url="#url['prevPage']#"); 
+						}
+					}
 				}
-
-				// Redirecionar para a pagina de Filmes a adicionar
-				//location(url="index.cfm");
 			}
 		}
 		
@@ -68,10 +93,10 @@
 						<cfinput name="inputNome" type="text" required="true" class="input-xlarge" placeholder="Informe seu nome completo">
 					</div>
 				</div>
-				<div class="control-group">
+				<cfoutput><div id="emailInput" class="control-group #emailError#"></cfoutput>
 					<label class="control-label" for="inputEmail">Email</label>
 					<div class="controls">
-						<cfinput name="inputEmail" type="email" required="true" class="input-large" placeholder="Informe seu email">
+						<cfinput name="inputEmail" type="email" required="true" class="input-large" placeholder="Informe seu email" message="Email já existente">
 					</div>
 				</div>
 				<div class="control-group">
@@ -80,7 +105,7 @@
 						<cfinput name="inputSenha" type="password" required="true" class="input-medium" placeholder="Senha">
 					</div>
 				</div>
-				<div class="control-group">
+				<cfoutput><div class="control-group #passwordError#"></cfoutput>
 					<label class="control-label" for="inputSenha2">Senha (novamente)</label>
 					<div class="controls">
 						<cfinput name="inputSenha2" type="password" required="true" class="input-medium" placeholder="Repita a Senha">
