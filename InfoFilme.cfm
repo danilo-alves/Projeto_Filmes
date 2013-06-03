@@ -6,6 +6,7 @@
     	<!-- spanN em que N se refere ao numero de colunas, Maximo de 12 colunas -->
     	<cfinclude template="MenuBar.cfm"> <!--- Inclui a barra de menus --->
     	
+    	
     	<div class="span10">
     		<div class="span2" style="float: left">
     			<img src="assets/img/GoT_Lannister.jpg" class="img-rounded" height="340" width="240"/>

@@ -41,7 +41,7 @@
 			<!--- //writeDump(form); --->
 			<!--- // Cria uma pasta com o nome do usuário --->
 			<!--- ExpandPath obtem o caminho completo para a diretório do projeto na pasta de imagens --->
-			<cfset basePath = ExpandPath("/Projeto_Filmes/UserData/User0/") />
+			<cfset basePath = ExpandPath("/Projeto_Filmes/UserData/User#usr.getId_Usuario()#/") />
 				<cftry>
 					<!--- // realiza o upload da imagem com base no padrao de diretorio para usuario --->
 					<cffile action="upload" fileField="fileData" destination="#basePath#" nameconflict="makeUnique" />
