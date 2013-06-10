@@ -3,9 +3,9 @@
 	<cfproperty name="id_Usuario" fieldtype="many-to-one" cfc="Usuario" fkcolumn="Id_Usuario">
 	<cfproperty name="Id_Genero" fieldtype="many-to-one" cfc="Genero" fkcolumn="Id_Genero">
 	<cfproperty name="Titulo" type="string" sqltype="VARCHAR(100)" required="true" ormtype="string" indexable="true">
-	<cfproperty name="Ano" type="numeric" sqltype="INTEGER" required="true" ormtype="int">
+	<cfproperty name="Ano" type="numeric" sqltype="INTEGER" required="true" ormtype="int" indexable="true">
 	<cfproperty name="Duracao" type="numeric" sqltype="INTEGER" required="true" ormtype="int">
-	<cfproperty name="Sinopse" type="string" sqltype="VARCHAR(250)" required="true" ormtype="string">
+	<cfproperty name="Sinopse" type="string" sqltype="VARCHAR(250)" required="true" ormtype="string" indexable="true">
 	<cfproperty name="Trailer" type="string" sqltype="VARCHAR(250)" required="true" ormtype="string">
 	<cfproperty name="Data_Adicao" type="date" require="true" ormtype="date"> 
 	

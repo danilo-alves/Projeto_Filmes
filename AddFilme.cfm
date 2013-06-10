@@ -36,12 +36,12 @@
 			<cfset filmeNovo.setId_Genero(entityLoad("Genero", {Id_Genero="#form.dropdown_Genero#"}, true)) />
 			<cfset EntitySave(filmeNovo) />
 			
-			<cfset ormFlush() />
+			<cfset ormFlush('ds_Projeto_Filme') />
 			
 			<!--- //writeDump(form); --->
 			<!--- // Cria uma pasta com o nome do usuário --->
 			<!--- ExpandPath obtem o caminho completo para a diretório do projeto na pasta de imagens --->
-			<cfset basePath = ExpandPath("/Projeto_Filmes/UserData/User#usr.getId_Usuario()#/") />
+			<cfset basePath = ExpandPath("/Projeto_Filmes/UserData/User#user.getId_Usuario()#/") />
 				<cftry>
 					<!--- // realiza o upload da imagem com base no padrao de diretorio para usuario --->
 					<cffile action="upload" fileField="fileData" destination="#basePath#" nameconflict="makeUnique" />
@@ -64,7 +64,7 @@
 						<cfoutput><div class='alert alert-error'><h1>Erro!</h1><p>#cfcatch.message#</p></div></cfoutput>
 					</cfcatch>
 				</cftry>
-				<cfset ormFlush() />
+				<cfset ormFlush('ds_Projeto_Filme') />
 		</cfif>
 	</cfif>		
 <cfcatch>
