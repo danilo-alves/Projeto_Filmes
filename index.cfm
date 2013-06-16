@@ -102,7 +102,7 @@
 												</cfif>
 							      			</a>
 								  			<h5>#filme.getTitulo()#</h5>
-			      							<p>#Mid(filme.getSinopse(), 1, 15)#...</p>
+			      							<p>#Mid(filme.getSinopse(), 1, 50)#...</p>
 										</cfoutput>
 							    	</div>
 							  	</li>	
@@ -116,7 +116,7 @@
 				<h4>Ultimos Filmes</h4>
 	    		<ul class="thumbnails">
 					<!--- Carrega os ultimos filmes adicionados --->
-					<cfset ultimosFilmes = EntityLoad('Filme', {}, "Data_Adicao Asc") > 
+					<cfset ultimosFilmes = EntityLoad('Filme', {}, "Data_Adicao Desc") > 
 					<!---<cfdump var="#ultimosFilmes#">--->
 	    			<cfloop index="filme" array="#ultimosFilmes#">
 						<cfset imgCapa = entityLoad('Imagem', {Id_Filme=filme}, true) />
@@ -140,7 +140,7 @@
 									</cftry>
 									</a>
 						  			<h5>#filme.getTitulo()#</h5>
-	      							<p>#Mid(filme.getSinopse(), 1, 15)#...</p>
+	      							<p>#Mid(filme.getSinopse(), 1, 100)#...</p>
 								</cfoutput>
 					    	</div>
 					  	</li>	

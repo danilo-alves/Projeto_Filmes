@@ -56,7 +56,7 @@
 						//location(url="index.cfm");
 						
 						// verifca se ha uma pagina anterior definida pelo GET para redimensionar apos o cadastro ser efetuado 
-						if(isDefined(url.prevPage)){
+						if(isDefined('url.prevPage')){
 							location(url="#url['prevPage']#"); 
 						}
 					}

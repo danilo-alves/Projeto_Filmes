@@ -12,26 +12,8 @@
 	<cfajaximport/>
 
   	<!--- Avaliacao de filme utilizando Ajax --->
-	<script>
-	function submitForm(id) {
-		var urlString = 'avaliarFilme.cfm?Id=';
-		urlString = urlString.concat(id);
-
-        ColdFusion.Ajax.submitForm('formAvaliacao', urlString, callback,
-            errorHandler);
-    }
-    
-    function callback(text)
-    {
-        divAval = document.getElementById('avaliacao');
-        alert("Obrigado por avaliar!");
-    }
-    
-    function errorHandler(code, msg)
-    {
-        alert("Error!!! " + code + ": " + msg);
-    }
-	</script>
+	<script  src="avaliarAction.js"></script>
+	<script  src="listaDesejoAction.js"></script>
 
 	<!-- Corpo do site  -->
     <div class="row">
@@ -55,7 +37,7 @@
 			</cfif>
 		</cfif>
 
-		<!--- <cftry> --->
+		<cftry>
 			<cfset imgCapa = EntityLoad('Imagem', {Id_Filme = #dadosFilme#}, true)>
 			
 			<div class="span10">
@@ -66,16 +48,16 @@
 					<cfimage action="writeToBrowser" source="#imgCapa.getImagem_Path()#" height="50%" width="50%">
 				</div>
 
-		<!--- <cfcatch>
+		<cfcatch>
 			<!--- Exibe um thumbnail padrao caso não exista imagem --->
 			<div class="span10">
 	    		<div class="span2" style="float: left">
 					<img data-src="holder.js/260x160">
 				</div> 
 		</cfcatch>
-		</cftry> --->
+		</cftry>
 
-		<!---<cfdump var="#dadosFilme#">--->
+		<!--- <cfdump var="#dadosFilme#"> --->
 
 			<cfoutput>
 				<div class="span6">
@@ -87,11 +69,14 @@
 	    			</cfif>
 	    			<p class="lead">Ano de lançamento: #dadosFilme.getAno()#</p>
 					
+					<!--- Lista de Desejo --->
+					<cfoutput><a href="javascript:adicionaLista(#url.Id#)" class="btn bnt-mini btn-info">Adicionar &aacute; Lista de Desejos</a></cfoutput>
 					<div id="star" data-score="1"></div>
 					<!--- <script>
 						$('#star').raty('score', 4);
 					</script> --->
-				</div>
+					</div>
+
 				<div class="span10">
 					<h3>Sinopse</h3>
 					<hr/>
@@ -108,8 +93,8 @@
 			</cfoutput>
 			<!--- Carrega as avaliacoes feitas pelos usuarios --->
 			<div id="avaliacao" class="span10">
-				<h3>Avaliação</h3>
 				<hr/>
+				<cfoutput><h3>Avalia&ccedil;&atilde;o</h3></cfoutput>
 				<a href="#myModal" role="button" class="btn" data-toggle="modal" class="btn btn-primary">Avalie este filme!</a>
 				
 				<hr/>
@@ -147,7 +132,7 @@
 									<p class="lead">#user.getNome()#</p>
 									<p>Nota: #aval.getNota()# </p>
 									<p>#aval.getCritica()#</p>
-									<p><a class="btn btn-success">Gostei!</a>	<a class="btn btn-danger">Não Gostei!</a></p>
+									<p><a class="btn btn-success">Gostei!</a><a class="btn btn-danger">Não Gostei!</a></p>
 								</div>								
 							</cfoutput>
 						</cfloop>

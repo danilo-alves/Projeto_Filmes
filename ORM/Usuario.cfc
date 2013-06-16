@@ -34,7 +34,19 @@
 		<cfif NOT isDefined('userSearch') OR userSearch EQ NULL>
 			<cfset userSearch = this/>
 		</cfif>
-			<cfset meusFilmes = EntityLoad('Filme', {Id_Usuario = #idFilme#}) />
+		<cfset meusFilmes = EntityLoad('Filme', {Id_Usuario = #userSearch#}) />
 		<cfreturn #meusFilmes#>
+	</cffunction>
+
+	<cffunction name="getListaFilmes">
+		<cfargument name="userSearch"/>
+
+		<!--- Caso não seja especificado nenhum arametro utiliza o usuário logado  --->
+		<cfif NOT isDefined('userSearch') OR userSearch EQ NULL>
+			<cfset userSearch = this/>
+		</cfif>
+		
+		<cfset listaFilmes = EntityLoad('ListaDesejo', {Usuario = #userSearch#}) />
+		<cfreturn #listaFilmes#>
 	</cffunction>
 </cfcomponent>

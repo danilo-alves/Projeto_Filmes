@@ -29,7 +29,7 @@
 			<cfset filmeNovo.setData_Adicao(NOW()) />
 			
 			<cfset user = EntityLoad("Usuario", {Email="#GetAuthUser()#"}, true)>
-			<cfdump var="#user#">	
+			<!--- <cfdump var="#user#">	 --->
 						
 			<!---// chaves estrangeiras--->
 			<cfset filmeNovo.setId_Usuario(user) /> 
@@ -53,7 +53,7 @@
 					<cfset imgCapa.setImagem_Path(#imgCapaPath#) > 
 					<cfset EntitySave(imgCapa) >
 					
-					<cfdump var="#cffile#">
+					<!--- <cfdump var="#cffile#"> --->
 					<div class='alert alert-success'>
 						<button type="button" class="close" data-dismiss="alert">&times;</button>
 						<h1>Sucesso!</h1>
@@ -69,7 +69,7 @@
 	</cfif>		
 <cfcatch>
 		<cfoutput>#cfcatch.Message#</cfoutput>
-		<cfdump var="#form#">
+		<!--- <cfdump var="#form#"> --->
 </cfcatch>
 </cftry>
 
