@@ -1,23 +1,30 @@
-﻿<!--- Inclui o conteudo de cabeçalho padrão --->
+<!--- Inclui o conteudo de cabeçalho padrão --->
 <cfinclude template="Header.cfm">
+
+	<!--- X-Editable plugin --->
+<!--- <link href="assets/x-editable-1.4.4/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
+<script src="assets/x-editable-1.4.4/bootstrap-editable/js/bootstrap-editable.min.js"></script> --->
 	
 	<cfparam name="imgCapa" default=""> 
+	<cfparam name="editEnabled" default="false">
 	
 	<!--- Necessário para formulário Ajax --->
 	<cfajaximport/>
 
   	<!--- Avaliacao de filme utilizando Ajax --->
 	<script>
-	function submitForm() {
-        ColdFusion.Ajax.submitForm('formAvaliacao', 'avaliarFilme.cfm', callback,
+	function submitForm(id) {
+		var urlString = 'avaliarFilme.cfm?Id=';
+		urlString = urlString.concat(id);
+
+        ColdFusion.Ajax.submitForm('formAvaliacao', urlString, callback,
             errorHandler);
     }
     
     function callback(text)
     {
-        divAval = document.getElementById('myModal');
-        
-        divAval.innerHTML += text;
+        divAval = document.getElementById('avaliacao');
+        alert("Obrigado por avaliar!");
     }
     
     function errorHandler(code, msg)
@@ -48,10 +55,8 @@
 			</cfif>
 		</cfif>
 
-		<cftry>
-			<cfset imgCapa = EntityLoad('Imagem', {Id_Filme = url.Id}, true)>
-
-			<cfdump var="==#imgCapa#==">
+		<!--- <cftry> --->
+			<cfset imgCapa = EntityLoad('Imagem', {Id_Filme = #dadosFilme#}, true)>
 			
 			<div class="span10">
 	    		<div class="span2" style="float: left">
@@ -61,20 +66,25 @@
 					<cfimage action="writeToBrowser" source="#imgCapa.getImagem_Path()#" height="50%" width="50%">
 				</div>
 
-		<cfcatch>
+		<!--- <cfcatch>
 			<!--- Exibe um thumbnail padrao caso não exista imagem --->
 			<div class="span10">
 	    		<div class="span2" style="float: left">
 					<img data-src="holder.js/260x160">
 				</div> 
 		</cfcatch>
-		</cftry>
+		</cftry> --->
 
 		<!---<cfdump var="#dadosFilme#">--->
 
-		<cfoutput>
+			<cfoutput>
 				<div class="span6">
-	    			<h2>#dadosFilme.getTitulo()#</h2>
+					<cfif #editEnabled# EQ "true">
+						<a href="" id="titulo" data-type="text" data-pk="#url.Id#" data-url="/post" data-original-title="Filme"><h2>#dadosFilme.getTitulo()#</h2></a>
+						<a href="" id="username" data-type="text" data-pk="1" data-url="/post" data-original-title="Enter username">superuser</a>
+					<cfelse>
+	    				<h2>#dadosFilme.getTitulo()#</h2>
+	    			</cfif>
 	    			<p class="lead">Ano de lançamento: #dadosFilme.getAno()#</p>
 					
 					<div id="star" data-score="1"></div>
@@ -110,30 +120,40 @@
 				    </div>
 				    <cfform name="formAvaliacao" method="POST" >
 				    	<div class="modal-body">	
-				    		<cftextarea name="txtAvaliacao" required="true" maxlength="300" height="300" width="300"/>				    	
+				    		<cftextarea name="txtAvaliacao" required="true" maxlength="300" height="300" width="300"/>	
+				    		<hr/>
+				    		<p>Avaliação</p>
+				    		<cfinput name="Nota" type="radio" value="1" />
+				    		<cfinput name="Nota" type="radio" value="2" />
+				    		<cfinput name="Nota" type="radio" value="3" />
+				    		<cfinput name="Nota" type="radio" value="4" />
+				    		<cfinput name="Nota" type="radio" value="5" />
+				    		
+				    		<cfinput name="labelNota" bind="{Nota}"/>
 				    	</div>
 					    <div class="modal-footer">
-					    	<a href="javascript:submitForm()" class="btn btn-primary">Avaliar</a>
+					    	<cfoutput><a href="javascript:submitForm(#url.Id#)" class="btn btn-primary">Avaliar</a></cfoutput>
 					    </div>
 				    </cfform>
 			    </div>
 	
-				<div class="hero-unit">
-					<p class="lead">Usuario</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc imperdiet cursus congue.
-					 Quisque porttitor luctus mauris, ac rhoncus libero dignissim vel. Sed eget posuere orci. 
-				 	Proin elit libero, feugiat sed suscipit sit amet, congue vitae eros. In vulputate scelerisque dui,
-				 	vitae mollis nisl aliquam sed. Proin consectetur velit </p>
-					<p><a class="btn btn-success">Gostei!</a>	<a class="btn btn-danger">Não Gostei!</a></p>
-				</div>
-				<div class="hero-unit">
-					<p class="lead">Usuario</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc imperdiet cursus congue.
-					 Quisque porttitor luctus mauris, ac rhoncus libero dignissim vel. Sed eget posuere orci. 
-				 	Proin elit libero, feugiat sed suscipit sit amet, congue vitae eros. In vulputate scelerisque dui,
-				 	vitae mollis nisl aliquam sed. Proin consectetur velit </p>
-					<p><a class="btn btn-success">Gostei!</a>	<a class="btn btn-danger">Não Gostei!</a></p>
-				</div>
+					<cfset avaliacoes = EntityLoad('Avaliacao', {Filme = #dadosFilme#}) />
+
+					<cfif arrayLen(avaliacoes) GT 0>
+						<cfloop index="aval" array="#avaliacoes#">
+							<cfoutput>
+								<div class="hero-unit">
+									<cfset user = aval.getUsuario() />
+									<p class="lead">#user.getNome()#</p>
+									<p>Nota: #aval.getNota()# </p>
+									<p>#aval.getCritica()#</p>
+									<p><a class="btn btn-success">Gostei!</a>	<a class="btn btn-danger">Não Gostei!</a></p>
+								</div>								
+							</cfoutput>
+						</cfloop>
+					<cfelse>
+						<cfoutput><p class="lead">Não há avaliações deste filme ainda, seja o primeiro a dar uma opinião.</p></cfoutput>
+					</cfif>
 			</div>
     	</div>
     </div>

@@ -25,4 +25,16 @@
 			   	inversejoincolumn="Id_Filme" 
 			   	lazy="true"
 				cascade="all">
+
+
+	<!--- Obtem os filmes criados pelo usuário --->
+	<cffunction name="getFilmeByUser">
+		<cfargument name="userSearch"/>
+
+		<cfif NOT isDefined('userSearch') OR userSearch EQ NULL>
+			<cfset userSearch = this/>
+		</cfif>
+			<cfset meusFilmes = EntityLoad('Filme', {Id_Usuario = #idFilme#}) />
+		<cfreturn #meusFilmes#>
+	</cffunction>
 </cfcomponent>

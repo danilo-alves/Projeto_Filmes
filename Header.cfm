@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Projeto Untitled</title>
+
 	<!-- Bootstrap -->
     <link href="assets/css/bootstrap.css" rel="stylesheet" media="screen">
     
@@ -15,11 +16,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
 	<!--- Star Rating - http://wbotelhos.com/raty/ --->
-	<script type="text/javascript" src="assets/lib/jquery.raty.min.js"></script>
-	<script type="text/javascript" src="assets/js/jquery.min.js"></script>
+	<!--- <script type="text/javascript" src="assets/lib/jquery.raty.min.js"></script>
+	<script type="text/javascript" src="assets/js/jquery.min.js"></script> --->
   </head>
   <body>
   	
+	<cfset user = EntityLoad('Usuario', {Email=getAuthUser()}, true)>
+
   	<!-- Barra de Menu Superior -->
   	<!-- Fora do div container ocupa toda a pagina  -->
   	<div class="navbar navbar-fixed-top navbar-inverse"><!-- navbar-inverse para barra de menu preta -->

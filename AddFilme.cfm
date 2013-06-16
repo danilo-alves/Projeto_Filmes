@@ -84,7 +84,7 @@
     	<!-- spanN em que N se refere ao numero de colunas, Maximo de 12 colunas -->
     	<cfinclude template="MenuBar.cfm"> <!--- Inclui a barra de menus --->
     	<div class="span10">
-    		<cfform class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
+    		<cfform name="form" class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
 			<fieldset>
 				<legend>Informações Gerais</legend>
 				<div class="control-group">
@@ -96,15 +96,16 @@
 				<div class="control-group">
 					<label class="control-label" for="sldrAno">Ano:</label>
 					<div class="controls">
-						<cfslider name="sldrAno" range="1900, #YEAR(NOW())#" format="html" increment="1" width="300">
+						<input name="sldrDuracao" type="number" step="1"  min="1900" max="#YEAR(NOW())#" required="true">
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="sldrDuracao">Tempo de duração:</label>
 					<div class="controls">
-						<cfslider name="sldrDuracao" range="1, 500" format="html" increment="1" width="300">
+						<input name="sldrDuracao" type="number" step="1"  min="1" max="1000" required="true">
 					</div>
 				</div>
+
 
 				<div class="control-group">
 					<label class="control-label" for="dropDown_Genero">Gênero</label>
