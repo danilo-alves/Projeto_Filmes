@@ -23,7 +23,7 @@
 		<cfelse>
 			<cfset filmeNovo.setTitulo(form.inputTitulo) />
 			<cfset filmeNovo.setAno(form.sldrAno) />
-			<cfset filmeNovo.setDuracao(120) />
+			<cfset filmeNovo.setDuracao(form.sldrDuracao) />
 			<cfset filmeNovo.setTrailer(form.inputTrailer) />
 			<cfset filmeNovo.setSinopse(form.txtSinopse) />
 			<cfset filmeNovo.setData_Adicao(NOW()) />
