@@ -8,28 +8,28 @@
 		    	<div class="span8 offset2">
 		    		
 			<!--=================  CAROUSEL  ==================== -->
-			    <div id="myCarousel" class="carousel slide">
-			      <div class="carousel-inner">
-			        <div class="item active">
-			          <img src="assets/img/GoT_Lannister.jpg" />
-			        </div>
-			        <div class="item">
-			          <img src="assets/img/GoT_Targaryen.jpg" />
-			        </div>
+			<div id="myCarousel" class="carousel slide">
+				<div class="carousel-inner">
+					<div class="item active">
+						<img src="assets/img/GoT_Lannister.jpg" />
+					</div>
 					<div class="item">
-			          <img src="assets/img/GoT_Stark.jpg" />
-			        </div>
+						<img src="assets/img/GoT_Targaryen.jpg" />
+					</div>
 					<div class="item">
-			          <img src="assets/img/GoT_Baratheon.jpg" />
-			      </div>
-				   <div class="carousel-caption">
-		    						<h4>Game of Thrones</h4>
-		    						<p>Série Game of Thrones começa sua 3 temporada.</p>
-		    					</div>
-			        </div>
-			      <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-			      <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
-			    </div>
+						<img src="assets/img/GoT_Stark.jpg" />
+					</div>
+					<div class="item">
+						<img src="assets/img/GoT_Baratheon.jpg" />
+					</div>
+				</div><!---fim do carousel-inner--->
+				<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+				<a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+				<div class="carousel-caption">
+					<h4>Game of Thrones</h4>
+					<p>Série Game of Thrones começa sua 3 temporada.</p>
+				</div>
+			</div>
 			<!-- FIM CAROUSEL -->
 
 
