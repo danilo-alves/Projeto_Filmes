@@ -7,7 +7,7 @@
 	
 	<!---Relacionamento muito para muitos --->
 	<!--- As chaves primária de Usuario e Grupo serão chave estrangeira da tabela Usuario_Grupo --->
-	<cfproperty name="Id_Grupo" 
+	<!--- <cfproperty name="Id_Grupo" 
 			   	fieldtype="many-to-many" 
 			   	CFC="Grupo" 
 			   	linktable="Usuario_Grupo" 
@@ -16,7 +16,7 @@
 			   	lazy="true"
 				cascade="all">
 				
-	<!---Relacionamento muito para muitos --->
+	Relacionamento muito para muitos 
 	<cfproperty name="Id_Filme_Aval" 
 			   	fieldtype="many-to-many" 
 			   	CFC="Filme" 
@@ -25,7 +25,7 @@
 			   	inversejoincolumn="Id_Filme" 
 			   	lazy="true"
 				cascade="all">
-
+ --->
 
 	<!--- Obtem os filmes criados pelo usuário --->
 	<cffunction name="getFilmeByUser">

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>Projeto Untitled</title>
@@ -61,9 +61,9 @@
 								</cfloop>
 		  					</ul></li>
 	  				
-	  				<li><a href="#">S&eacute;ries</a></li>
+	  				<li><a href="Grupos.cfm">Grupos</a></li>
 	  				
-	  				<li><a href="#">Artistas</a></li>
+	  				<li><a href="MinhaListaDesejo.cfm">Lista de Desejos</a></li>
 	  				
 	  				<li><a href="#">Sobre</a></li>
 	  			</ul>

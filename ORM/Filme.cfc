@@ -1,4 +1,4 @@
-﻿<cfcomponent entityName="Filme" persistent="true" indexable="true" autoindex="true">
+﻿<cfcomponent entityName="Filme" persistent="true" indexable="true" autoindex="true" table="tbl_Filme">
 	<cfproperty name="Id_Filme" fieldtype="id" generator="identity" type="numeric" ormtype="int" indexable="true" >
 	<cfproperty name="id_Usuario" fieldtype="many-to-one" cfc="Usuario" fkcolumn="Id_Usuario">
 	<cfproperty name="Id_Genero" fieldtype="many-to-one" cfc="Genero" fkcolumn="Id_Genero">
@@ -9,7 +9,7 @@
 	<cfproperty name="Trailer" type="string" sqltype="VARCHAR(500)" required="FALSE" ormtype="string">
 	<cfproperty name="Data_Adicao" type="date" require="true" ormtype="date"> 
 	<cfproperty name="NotaMedia" type="numeric" ormType="float">
-	
+	<!--- 
 	<!---Relacionamento muito para muitos --->
 	<cfproperty name="Id_Usuario_Aval" 
 			   	fieldtype="many-to-many" 
@@ -18,7 +18,7 @@
 			   	FKColumn="Id_Filme" 
 			   	inversejoincolumn="Id_Usuario" 
 			   	lazy="true"
-				cascade="all">
+				cascade="all"> --->
 				
 				
 	<!--- Métodos --->

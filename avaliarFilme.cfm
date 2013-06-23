@@ -13,6 +13,18 @@
 	<cfset avaliacao.setNota(form.Nota)>
 	<cfset avaliacao.setCritica(form.txtAvaliacao)>
 
+	<cfif filme.getNotaMedia() EQ "">
+		<cfset filme.setNotaMedia(0) >
+		<cfset qtdAval = 1>
+	<cfelse>
+	</cfif>
+
+	<!--- Calcula a media de avaliacao com a nova nota --->
+	<cfset qtdAval = arrayLen(EntityLoad('Avaliacao', {Filme = #filme#})) >
+	<cfset qtdAval = qtdAval + 1 >
+
+	<cfset filme.setNotaMedia(filme.getNotaMedia() + (avaliacao.getNota() / qtdAval)) >
+
 	<cftry>
 		<cfset EntitySave(avaliacao) />
 

@@ -1,8 +1,8 @@
-﻿<cfcomponent name="Grupo" persistent="true" table="tbl_Grupo">
+﻿<cfcomponent name="Grupo" persistent="true" table="tbl_Grupo" autoindex="true" indexable="true">
 	<cfproperty name="Id_Grupo" fieldtype="id" generator="identity" type="numeric" ormtype="int">
 	<cfproperty name="Id_Usuario" fieldtype="many-to-one" cfc="Usuario" fkcolumn="Id_Usuario"><!--- chave estrangeira --->
-	<cfproperty name="Nome_Grupo" fieldtype="column" type="string" sqltype="VARCHAR(100)" required="true" ormtype="string">
-	<cfproperty name="Descricao" fieldtype="column" type="string" sqltype="VARCHAR(2000)" required="false" ormtype="string">
+	<cfproperty name="Nome_Grupo" fieldtype="column" type="string" sqltype="VARCHAR(100)" required="true" ormtype="string" indexable="true">
+	<cfproperty name="Descricao" fieldtype="column" type="string" sqltype="VARCHAR(2000)" required="false" ormtype="string" indexable="true">
 	
 	<!---Relacionamento muito para muitos --->
 	<!--- As chaves primária de Usuario e Grupo serão chave estrangeira da tabela Usuario_Grupo --->

@@ -2,8 +2,10 @@
 <cfinclude template="Header.cfm">
 
 	<!--- X-Editable plugin --->
-<!--- <link href="assets/x-editable-1.4.4/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
-<script src="assets/x-editable-1.4.4/bootstrap-editable/js/bootstrap-editable.min.js"></script> --->
+<!--- <link href="assets/x-editable-1.4.4/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet"> --->
+<!--- <script src="assets/x-editable-1.4.4/bootstrap-editable/js/bootstrap-editable.min.js"></script> --->
+<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.4/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
+<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.4/bootstrap-editable/js/bootstrap-editable.min.js"></script>
 	
 	<cfparam name="imgCapa" default=""> 
 	<cfparam name="editEnabled" default="false">
@@ -14,18 +16,20 @@
   	<!--- Avaliacao de filme utilizando Ajax --->
 	<script  src="avaliarAction.js"></script>
 	<script  src="listaDesejoAction.js"></script>
+	<script  src="pontuacaoCritica.js"></script>
+
 
 	<!-- Corpo do site  -->
     <div class="row">
     	<!-- spanN em que N se refere ao numero de colunas, Maximo de 12 colunas -->
-    	<cfinclude template="MenuBar.cfm"> <!--- Inclui a barra de menus --->
+    	<cfinclude template="CheckMenuBar.cfm"> <!--- Inclui a barra de menus --->
 
     	<cfset id_filme = url.Id >
 
 		<!--- Retorna um registro unico (true) do Filme de Id recebido pela URL --->
     	<cfset dadosFilme = EntityLoad('Filme', {Id_Filme = url.Id}, true)>
 		
-		<cfif getAuthUser() NEQ "">
+		<cfif isUserLoggedin()>
 			
 			<!--- Verifica se o visitante da pagina de filme é o criador e entao permite a edicao --->
 			<cfset userCriador = dadosFilme.getId_Usuario()>
@@ -40,6 +44,7 @@
 		<cftry>
 			<cfset imgCapa = EntityLoad('Imagem', {Id_Filme = #dadosFilme#}, true)>
 			
+			<!--- spanNum obtido em CheckMenuBar.cfm --->
 			<div class="span10">
 	    		<div class="span2" style="float: left">
 					<cfset imgPath = #imgCapa.getImagem_Path()#>
@@ -57,27 +62,43 @@
 		</cfcatch>
 		</cftry>
 
-		<!--- <cfdump var="#dadosFilme#"> --->
-
+			<!--- CONTEUDO --->
 			<cfoutput>
-				<div class="span6">
+				<div class="span7">
 					<cfif #editEnabled# EQ "true">
-						<a href="" id="titulo" data-type="text" data-pk="#url.Id#" data-url="/post" data-original-title="Filme"><h2>#dadosFilme.getTitulo()#</h2></a>
-						<a href="" id="username" data-type="text" data-pk="1" data-url="/post" data-original-title="Enter username">superuser</a>
+						<div class="span8">
+							<h2>#dadosFilme.getTitulo()#</h2>
+						</div>
 					<cfelse>
 	    				<h2>#dadosFilme.getTitulo()#</h2>
 	    			</cfif>
-	    			<p class="lead">Ano de lançamento: #dadosFilme.getAno()#</p>
+
+	    			<p class="lead">Ano de lan&ccedil;amento: #dadosFilme.getAno()#
+	    			<br/>
+	    			<cfif dadosfilme.getNotaMedia() EQ "">
+						N&atilde;o h&aacute; avalia&ccedil;&atilde;o para este filme.
+					<cfelse>
+						M&eacute;dia: #dadosfilme.getNotaMedia()#
+					</cfif>
+	    			</p>
 					
 					<!--- Lista de Desejo --->
-					<cfoutput><a href="javascript:adicionaLista(#url.Id#)" class="btn bnt-mini btn-info">Adicionar &aacute; Lista de Desejos</a></cfoutput>
+					<div class="span2 pull-right">
+						<cfif isUserLoggedin()>
+							<cfoutput><a href="javascript:adicionaLista(#url.Id#)" class="btn bnt-mini btn-info">Adicionar &aacute; Lista de Desejos</a></cfoutput>
+						</cfif>
+
+						<cfif #editEnabled#>
+							<cfoutput><a href="AddFilme.cfm?Id=#url.Id#" class="btn bnt-mini btn-warning">Editar</a></cfoutput>
+							<cfoutput><a href="javascript:adicionaLista(#url.Id#)" class="btn bnt-mini btn-error">Excluir</a></cfoutput>
+						</cfif>
+					</div>
 					<div id="star" data-score="1"></div>
 					<!--- <script>
 						$('#star').raty('score', 4);
 					</script> --->
-					</div>
-
-				<div class="span10">
+				</div>
+				<div class="#spanNum#">
 					<h3>Sinopse</h3>
 					<hr/>
 					
@@ -91,8 +112,9 @@
 
 				</div>
 			</cfoutput>
-			<!--- Carrega as avaliacoes feitas pelos usuarios --->
-			<div id="avaliacao" class="span10">
+
+
+			<cfoutput><div id="avaliacao" class="#spanNum#"></cfoutput>
 				<hr/>
 				<cfoutput><h3>Avalia&ccedil;&atilde;o</h3></cfoutput>
 				<a href="#myModal" role="button" class="btn" data-toggle="modal" class="btn btn-primary">Avalie este filme!</a>
@@ -113,26 +135,27 @@
 				    		<cfinput name="Nota" type="radio" value="3" />
 				    		<cfinput name="Nota" type="radio" value="4" />
 				    		<cfinput name="Nota" type="radio" value="5" />
-				    		
-				    		<cfinput name="labelNota" bind="{Nota}"/>
 				    	</div>
 					    <div class="modal-footer">
-					    	<cfoutput><a href="javascript:submitForm(#url.Id#)" class="btn btn-primary">Avaliar</a></cfoutput>
+					    	<cfoutput><a href="javascript:submitForm(#url.Id#)" class="btn btn-primary" data-dismiss="modal">Avaliar</a></cfoutput>
 					    </div>
 				    </cfform>
 			    </div>
 	
-					<cfset avaliacoes = EntityLoad('Avaliacao', {Filme = #dadosFilme#}) />
+					<cfset avaliacoes = EntityLoad('Avaliacao', {Filme = #dadosFilme#}, "Pontuacao as Desc",{maxResults=10}) />
 
 					<cfif arrayLen(avaliacoes) GT 0>
 						<cfloop index="aval" array="#avaliacoes#">
 							<cfoutput>
 								<div class="hero-unit">
 									<cfset user = aval.getUsuario() />
-									<p class="lead">#user.getNome()#</p>
-									<p>Nota: #aval.getNota()# </p>
+									<p class="lead">#user.getNome()#<br/>
+									Nota: #aval.getNota()#<br/>
 									<p>#aval.getCritica()#</p>
-									<p><a class="btn btn-success">Gostei!</a><a class="btn btn-danger">Não Gostei!</a></p>
+									<cfform id="hero_#aval.getId_Avaliacao()#" name="formPont">
+										<cfinput name="id" type="hidden" value="#aval.getId_Avaliacao()#"/>
+										<p><a class="btn btn-success" href="javascript:submitPont(1,'#isUserLoggedin()#')">Gostei!</a>       <a class="btn btn-danger" href="javascript:submitPont(0,'#isUserLoggedin()#')">Não Gostei!</a></p>
+									</cfform>
 								</div>								
 							</cfoutput>
 						</cfloop>

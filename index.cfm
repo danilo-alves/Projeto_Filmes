@@ -57,13 +57,7 @@
 	    <div class="row">
 	    	
 			<!--- Verifica se o usuário esta logado e oculta a barra de opcoes caso o usuário não esteja logado --->
-	    	<cfif GetAuthUser() NEQ "">
-				<cfset spanNum = "span10">
-				<!-- spanN em que N se refere ao numero de colunas, Maximo de 12 colunas -->
-	    		<cfinclude template="MenuBar.cfm"> <!--- Inclui a barra de menus --->
-			<cfelse>
-				<cfset spanNum = "span12">
-	    	</cfif>
+	    	<cfinclude template="CheckMenuBar.cfm">
 	    		
 	    		<!--- Exibe os resultados de busca somente quando é passado algum conteudo pelo campo de busca --->
 	    		<cfif isDefined("form.submitSearch") AND form.txtSearch NEQ "">
@@ -140,7 +134,7 @@
 									</cftry>
 									</a>
 						  			<h5>#filme.getTitulo()#</h5>
-	      							<p>#Mid(filme.getSinopse(), 1, 100)#...</p>
+	      							<p>#LJustify(Mid(filme.getSinopse(), 1, 100), 100)#...</p>
 								</cfoutput>
 					    	</div>
 					  	</li>	
