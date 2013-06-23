@@ -69,7 +69,7 @@
 
 					<!--- // verifca se ha uma pagina anterior definida pelo GET para redimensionar apos o cadastro ser efetuado  --->
 					<cfif isDefined('url.prevPage') >
-						<cfset location(url="#url['prevPage']#") />
+						<cfset location(url="#url.prevPage#") />
 					</cfif>
 				</cfif>
 			</cfif>

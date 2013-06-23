@@ -2,20 +2,26 @@
 // Data criacao: 16/06
 // Autor: Danilo
 
-function submitJoin() {
-	var urlString = 'JoinGrupo.cfm';
+function submitJoin(idgrupo, join) {
+	var urlString = 'JoinGrupo.cfm?join=' + join;
+	
+	// passa os dados do formulário de acordo com o id do grupo
+	var formName = 'formJoin' + idgrupo;
+	formName = formName.trim();
 
-    ColdFusion.Ajax.submitForm('formJoin', urlString, callback,
+    ColdFusion.Ajax.submitForm(formName, urlString, callback,
         errorHandler);
+
+    var botaoId = 'btnAction' + idgrupo;
+    botaoId = botaoId.trim();
+    var botao = document.getElementById(botaoId);
+    botao.parentNode.removeChild(botao);
 }
 
 function callback(text)
 {
     divAval = document.getElementById('maincontent');
-
-    divAval.innerHTML += text;
-
-    alert('Thanks');
+    divAval.innerHTML = text + divAval.innerHTML;
 }
 
 function errorHandler(code, msg)

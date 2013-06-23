@@ -38,6 +38,8 @@
 			<!--- Habilita o modo de edição --->
 			<cfif userCriador.getEmail() EQ user.getEmail()>
 				<cfset editEnabled = "true">
+			<cfelse>
+				<cfset editEnabled = "false">
 			</cfif>
 		</cfif>
 

@@ -57,7 +57,8 @@
 									SELECT Id_Genero, Descricao FROM tbl_Genero
 								</cfquery>
 								<cfloop query="getGeneros" endRow="10">
-										<li><a href=""><cfoutput>#Descricao#</cfoutput></a></li>
+										<!--- Coloca como link o id do genero a ser pesquisado --->
+										<cfoutput><li><a href="Index.cfm?search=#Id_Genero#">#Descricao#</a></li></cfoutput>
 								</cfloop>
 		  					</ul></li>
 	  				

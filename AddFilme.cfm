@@ -1,4 +1,4 @@
-﻿<!--- Inclui o conteudo de cabeçalho padrão --->
+﻿<!--- Inclui o conteudo de cabe&ccedil;alho padr&atilde;o --->
 <cfinclude template="Header.cfm">
 
 <cfparam name="form.inputTitulo" default="">
@@ -19,11 +19,11 @@
 		
 		<cfset dadosFilme = EntityLoadByPk('FIlme', #url.Id#) >
 
-		<!--- Verifica se o visitante da pagina de filme é o criador e entao permite a edicao --->
+		<!--- Verifica se o visitante da pagina de filme &eacute; o criador e entao permite a edicao --->
 		<cfset userCriador = dadosFilme.getId_Usuario()>
 		<!--- <cfset user = EntityLoad('Usuario', {Email=getAuthUser()}, true)> --->
 
-		<!--- Habilita o modo de edição --->
+		<!--- Habilita o modo de edi&ccedil;&atilde;o --->
 		<cfif userCriador.getEmail() EQ user.getEmail()>
 			<cfset editEnabled = "true">
 		</cfif>
@@ -32,7 +32,7 @@
 
 <cftry>
 
-	<!--- // Condicao satisfeita somente quando o formulário é enviado via POST contendo os dados do formulário --->
+	<!--- // Condicao satisfeita somente quando o formulário &eacute; enviado via POST contendo os dados do formulário --->
 	<cfif isDefined('form.btnCadastrar')>
 		<cfif NOT isDefined('editEnabled')>
 			<cfset filmeNovo = entityNew('Filme') />
@@ -93,7 +93,7 @@
 							<p>Filme editado com sucesso!</p>
 						</cfif>
 						<cfoutput>
-							<p>Clique <a href="InfoFilme.cfm?Id=#dadosFilme.getId_Filme()#">aqui</a> para visualizar e modificar as informações deste filme</p>
+							<p>Clique <a href="InfoFilme.cfm?Id=#dadosFilme.getId_Filme()#">aqui</a> para visualizar e modificar as informa&ccedil;&otilde;es deste filme</p>
 						</cfoutput>
 					</div>
 					<cfcatch type="application">
@@ -111,7 +111,7 @@
 
 
 <!--- Verifica se o usuário esta logado para poder cadastrar o filme
-	isUserLoggedin é uma função do módulo de autenticação do ColdFusion.
+	isUserLoggedin &eacute; uma fun&ccedil;&atilde;o do módulo de autentica&ccedil;&atilde;o do ColdFusion.
 	Caso contrário redireciona o usuário para a pagina de cadastro --->
 <cfif isUserLoggedin() >
 <!-- Corpo do site  -->
@@ -122,7 +122,7 @@
     	<div class="span10">
     		<cfform name="form" class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
 			<fieldset>
-				<legend>Informações Gerais</legend>
+				<legend>Informa&ccedil;&otilde;es Gerais</legend>
 				<div class="control-group">
 					<label class="control-label" for="inputTitulo">Titulo:</label>
 					<div class="controls">
@@ -137,7 +137,7 @@
 					<label class="control-label" for="sldrAno">Ano:</label>
 					<div class="controls">
 						<cfoutput>
-							<input name="sldrAno" type="number" step="1"  min="1900" max="#YEAR(NOW())#" required="true" message="Informe o ano de lançamento" 
+							<input name="sldrAno" type="number" step="1"  min="1900" max="#YEAR(NOW())#" required="true" message="Informe o ano de lan&ccedil;amento" 
 								<cfif isDefined('editEnabled')>
 									value="#dadosFilme.getAno()#"
 								</cfif>
@@ -146,7 +146,7 @@
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="sldrDuracao">Tempo de duração:</label>
+					<label class="control-label" for="sldrDuracao">Tempo de dura&ccedil;&atilde;o:</label>
 					<div class="controls">
 						<cfoutput>
 							<input name="sldrDuracao" type="number" step="1"  min="1" max="1000" required="true"
@@ -232,9 +232,9 @@
 <cfelse>
 	<!--- Redireciona para a pagina de cadastro --->
 	<div class='alert alert-warning'>
-		<h3>Usuário não autenticado!</h3>
-		<p>Faça o login ou <a href="Cadastro.cfm?prevPage=AddFilme.cfm">cadastre-se</a> agora. É simples!</p>
+		<h3>Usuário n&atilde;o autenticado!</h3>
+		<p>Fa&ccedil;a o login ou <a href="Cadastro.cfm?prevPage=AddFilme.cfm">cadastre-se</a> agora. É simples!</p>
 	</div> 
 </cfif>
-<!--- Inclui o conteudo de rodapé padrão --->
+<!--- Inclui o conteudo de rodap&eacute; padr&atilde;o --->
 <cfinclude template="Footer.cfm">

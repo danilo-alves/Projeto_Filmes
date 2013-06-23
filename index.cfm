@@ -61,21 +61,44 @@
 	    	<cfinclude template="CheckMenuBar.cfm">
 	    		
 	    		<!--- Exibe os resultados de busca somente quando é passado algum conteudo pelo campo de busca --->
-	    		<cfif isDefined("form.submitSearch") AND form.txtSearch NEQ "">
+	    		<cfif isDefined("form.submitSearch") AND form.txtSearch NEQ "" OR isDefined('url.search')>
 		    		<cfoutput><div class="#spanNum#"></cfoutput>
 		    		
-					<h4>Você procurou por "<cfoutput>#form.txtSearch#</cfoutput>"</h4>
+		    		 <cfif NOT isDefined('url.search')>
+						<h4>Você procurou por "<cfoutput>#form.txtSearch#</cfoutput>"</h4>
+					<cfelse>
+						<cfset genero = EntityLoadByPk('Genero', #url.search#)>
+						<cfoutput><h4>Filmes de #genero.getDescricao()#</h4></cfoutput>
+					</cfif>
+
+
 		    		<ul class="thumbnails">
-						 
-						<cfset resultSearch = ORMSearch('#form.txtSearch#*', "Filme", [ "Titulo", "Sinopse", "Ano"])>
+						
+						 <cfif NOT isDefined('url.search')>
+							<cfset resultSearch = ORMSearch('#form.txtSearch#*', "Filme", [ "Titulo", "Sinopse", "Ano"])>
+							<cfset filmesResult = resultSearch.data>
+							
+							<cfif #resultSearch.MaxTotalCount# EQ 0>
+								<p class="offset1">Nenhum resultado encontrado.</p>
+							</cfif>
+						 <cfelse>
+						 	<cfset resultSearch = EntityLoad('Filme', {Id_Genero = #genero#})>
+						 	<cfset filmesResult = resultSearch>
+
+							
+						 	<cfif ARRAYlen('#filmesResult#') EQ 0>
+								<cfoutput><p class="offset1">N&atilde;o h&aacute; filmes de #genero.getDescricao()# cadastrado.</p></cfoutput>
+							</cfif>
+						 </cfif>
 						
 
-						<cfif len('resultSearch.data') EQ 0>
-							<p class="offset1">Nenhum resultado encontrado.</p>
-						</cfif>
 						<!---<cfdump var="#ultimosFilmes#">--->
-		    			<cfloop index="filmeRes" array="#resultSearch.data#">
-							<cfset filme = filmeRes.entity>
+		    			<cfloop index="filmeRes" array="#filmesResult#">
+							<cfif NOT isDefined('url.search')>
+								<cfset filme = filmeRes.entity>
+							<cfelse>
+								<cfset filme = filmeRes> 
+							</cfif>
 							
 							<cfset imgCapa = entityLoad('Imagem', {Id_Filme=filme}, true) />	
 
