@@ -86,7 +86,7 @@
 									<div class='alert alert-error'>
 										<button type="button" class="close" data-dismiss="alert">&times;</button>
 										<h1>Erro ao carregar a imagem!</h1>
-										<p>Verifica o tipo de arquivo que voc&ecirc; esta tentado utilizar.</p>
+										<p>Verifique o tipo de arquivo que voc&ecirc; est&aacute; tentando utilizar.</p>
 									</div>
 								</cfoutput>
 							</cfcatch>
@@ -122,9 +122,9 @@
 					<label class="control-label" for="inputGrupo">Nome do Grupo:</label>
 					<div class="controls">
 						<cfif NOT isDefined('editEnabled')>
-							<cfinput name="inputGrupo" type="text" required="true" class="input-xxlarge" placeholder="Nome do Grupo">
+							<cfinput name="inputGrupo" type="text" required="true" class="input-xxlarge" placeholder="Nome do Grupo" message="Infome um nome de grupo válido.">
 						<cfelse>
-							<cfinput name="inputGrupo" type="text" required="true" class="input-xxlarge" placeholder="Nome do Grupo" value="#dadosGrupo.getNome_Grupo()#">
+							<cfinput name="inputGrupo" type="text" required="true" class="input-xxlarge" placeholder="Nome do Grupo" value="#dadosGrupo.getNome_Grupo()#" message="Infome um nome de grupo válido.">
 						</cfif>
 					</div>
 				</div>
@@ -138,13 +138,13 @@
 							<cfset imgCapa = EntityLoad('ImagemGrupo', {Id_Grupo = #dadosGrupo#}, true)>
 							<cfif isDefined('imgCapa')>
 								<cfoutput><cfimage action="writeToBrowser" source="#imgCapa.getImagem_Path()#" height="100" width="100"></cfoutput>
-								<cfinput type="file" name="fileData" value="#imgCapa.getImagem_Path()#"  accept="image/jpg,image/gif,image/png,image/jpeg" >
+								<cfinput type="file" name="fileData" value="#imgCapa.getImagem_Path()#"  accept="image/jpg,image/gif,image/png,image/jpeg" message="Adicione um arquivo de imagem v&aacute;lido (png, jpg ou gif).">
 							<cfelse>
 								<img data-src="holder.js/160x160">
-								<cfinput type="file" name="fileData"  accept="image/jpg,image/gif,image/png,image/jpeg" >
+								<cfinput type="file" name="fileData"  accept="image/jpg,image/gif,image/png,image/jpeg" message="Adicione um arquivo de imagem v&aacute;lido (png, jpg ou gif)." >
 							</cfif>
 						<cfelse>
-							<cfinput type="file" name="fileData"  accept="image/jpg,image/gif,image/png,image/jpeg" >
+							<cfinput type="file" name="fileData"  accept="image/jpg,image/gif,image/png,image/jpeg" message="Adicione um arquivo de imagem v&aacute;lido (png, jpg ou gif).">
 						</cfif>
 
 					</div>
@@ -153,7 +153,7 @@
 			<fieldset>
 				<legend>Descri&ccedil;&atilde;o</legend>
 				<div class="control-group">
-					<cftextarea name="txtDescricao" rows="5" maxlength="300" width="300" richtext="false">
+					<cftextarea name="txtDescricao" rows="5" maxlength="300" width="300" richtext="false" message="Informe uma descri&ccedil;ão par identificar seu grupo.">
 						<cfif isDefined('editEnabled')>
 							<cfoutput>#dadosGrupo.getDescricao()#</cfoutput>
 						</cfif>
@@ -176,7 +176,7 @@
 	<!--- Redireciona para a pagina de cadastro --->
 	<div class='alert alert-warning'>
 		<h3>Usu&aacute;rio n&atilde;o autenticado!</h3>
-		<p>Fa&ccedil;a o login ou <a href="Cadastro.cfm?prevPage=AddFilme.cfm">cadastre-se</a> agora. É simples!</p>
+		<p>Fa&ccedil;a o login ou <a href="Cadastro.cfm?prevPage=AddFilme.cfm">cadastre-se</a> agora. &Eacute; simples!</p>
 	</div> 
 </cfif>
 <!--- Inclui o conteudo de rodapé padr&atilde;o --->

@@ -140,6 +140,8 @@
 							<input name="sldrAno" type="number" step="1"  min="1900" max="#YEAR(NOW())#" required="true" message="Informe o ano de lan&ccedil;amento" 
 								<cfif isDefined('editEnabled')>
 									value="#dadosFilme.getAno()#"
+								<cfelse>
+									value="#YEAR(NOW())#"
 								</cfif>
 							>
 						</cfoutput>
@@ -149,9 +151,11 @@
 					<label class="control-label" for="sldrDuracao">Tempo de dura&ccedil;&atilde;o:</label>
 					<div class="controls">
 						<cfoutput>
-							<input name="sldrDuracao" type="number" step="1"  min="1" max="1000" required="true"
+							<input name="sldrDuracao" type="number" step="1"  min="1" max="1000" required="true" placeholder="Tempo em minutos"
 								<cfif isDefined('editEnabled')>
 									value="#dadosFilme.getDuracao()#"
+								<cfelse>
+									value="60"
 								</cfif>	
 							>
 						</cfoutput>
@@ -170,7 +174,8 @@
 								  value="Id_Genero"
 								  display="Descricao"
 								  required="true"
-								  multiple="false">
+								  multiple="false"
+								  message="Selecione uma categoria para o filme">
 						</cfselect>
 					</div>
 				</div>
@@ -195,11 +200,11 @@
 					<label class="control-label" for="inputTrailer">Trailer:</label>
 					<div class="controls">
 						<cfoutput>
-							<input name="inputTrailer" type="text" maxlength="100" required="true" class="input-xxlarge" placeholder="Link do filme"
-								<cfif isDefined('editEnabled')>
-									value="#dadosFilme.getTrailer()#"
-								</cfif>
-							>
+							<cfif NOT isDefined('editEnabled')>
+								<cfinput name="inputTrailer" type="text" maxlength="100" required="true" class="input-xxlarge" placeholder="Link do filme">
+							<cfelse>
+								<cfinput name="inputTrailer" type="text" maxlength="100" required="true" class="input-xxlarge" placeholder="Link do filme" value="#dadosFilme.getTrailer()#">
+							</cfif>
 						</cfoutput>
 					</div>
 				</div>
@@ -208,11 +213,11 @@
 				<legend>Sinopse</legend>
 				<div class="control-group">
 					<cfoutput>
-						<textarea name="txtSinopse" rows="5" cols="0" maxlength="300" width="300">
+						<cftextarea name="txtSinopse" rows="5" cols="0" maxlength="300" width="300" message="Informe uma descrição para o filme" required="true">
 							<cfif isDefined('editEnabled')>
 								#dadosFilme.getSinopse()#
 							</cfif>
-						</textarea>							
+						</cftextarea>							
 					</cfoutput>
 				</div>
 			</fieldset>
@@ -233,7 +238,7 @@
 	<!--- Redireciona para a pagina de cadastro --->
 	<div class='alert alert-warning'>
 		<h3>Usu&aacute;rio n&atilde;o autenticado!</h3>
-		<p>Fa&ccedil;a o login ou <a href="Cadastro.cfm?prevPage=AddFilme.cfm">cadastre-se</a> agora. É simples!</p>
+		<p>Fa&ccedil;a o login ou <a href="Cadastro.cfm?prevPage=AddFilme.cfm">cadastre-se</a> agora. &Eacute; simples!</p>
 	</div> 
 </cfif>
 <!--- Inclui o conteudo de rodap&eacute; padr&atilde;o --->

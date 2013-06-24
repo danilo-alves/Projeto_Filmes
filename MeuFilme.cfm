@@ -49,7 +49,7 @@
 	<!--- Redireciona para a pagina de cadastro --->
 	<div class='alert alert-warning'>
 		<h3>Usu&aacute;rio n&atilde;o autenticado!</h3>
-		<p>Fa&ccedil;a o login ou <a href="Cadastro.cfm?prevPage=AddFilme.cfm">cadastre-se</a> agora. É simples!</p>
+		<p>Fa&ccedil;a o login ou <a href="Cadastro.cfm?prevPage=AddFilme.cfm">cadastre-se</a> agora. &Eacute; simples!</p>
 	</div> 
 </cfif>
 <!--- Inclui o conteudo de rodapé padr&atilde;o --->

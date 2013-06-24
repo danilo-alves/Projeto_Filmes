@@ -95,9 +95,9 @@
 				<!--- //location(url="index.cfm"); --->
 					
 				<!--- // verifca se ha uma pagina anterior definida pelo GET para redimensionar apos o cadastro ser efetuado  --->
-				<cfif isDefined('url.prevPage') >
-					<cfset location(url="#url.prevPage#") />
-				</cfif>
+				// <cfif isDefined('url.prevPage') >
+					<cfset location(url="index.cfm") />
+				<!--- </cfif> --->
 			</cfif>
 		</cfif>
 	</cfif>
@@ -141,9 +141,9 @@
 					<label class="control-label" for="inputEmail">Email</label>
 					<div class="controls">
 						<cfif NOT isDefined('editEnabled')>
-							<cfinput name="inputEmail" type="email" required="true" class="input-xlarge" placeholder="Informe seu email" message="Email j&aacute; existente">
+							<cfinput name="inputEmail" type="email" required="true" class="input-xlarge" placeholder="Informe seu email" message="Informe um email v&aacute;lido">
 						<cfelse>
-							<cfinput name="inputEmail" type="email" required="true" class="input-xlarge" placeholder="Informe seu email" message="Email j&aacute; existente" value="#user.getEmail()#" disabled="true">
+							<cfinput name="inputEmail" type="email" required="true" class="input-xlarge" placeholder="Informe seu email" message="Informe um email v&aacute;lido" value="#user.getEmail()#" disabled="true">
 						</cfif>
 					</div>
 				</div>
@@ -151,13 +151,13 @@
 					<div class="control-group">
 						<label class="control-label" for="inputSenha">Senha</label>
 						<div class="controls">
-							<cfinput name="inputSenha" type="password" required="true" class="input-medium" placeholder="Senha">
+							<cfinput name="inputSenha" type="password" required="true" class="input-medium" placeholder="Senha" message="Informe uma senha valida.">
 						</div>
 					</div>
 					<cfoutput><div class="control-group #passwordError#"></cfoutput>
 						<label class="control-label" for="inputSenha2">Senha (novamente)</label>
 						<div class="controls">
-							<cfinput name="inputSenha2" type="password" required="true" class="input-medium" placeholder="Repita a Senha">
+							<cfinput name="inputSenha2" type="password" required="true" class="input-medium" placeholder="Repita a Senha"  message="Informe uma senha correspondente">
 						</div>
 					</div>
 				</cfif>

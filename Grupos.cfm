@@ -64,7 +64,7 @@
 										<cfset isMember = EntityLoad('Usuario_Grupo', {Grupo = #grupo#, Usuario = #user#})>
 										<cfif #editEnabled#>
 											<cfoutput><p><a href="addGrupo.cfm?Id=#grupo.getID_Grupo()#" class="btn bnt-mini btn-warning">Editar</a></p></cfoutput>
-											<cfoutput><a href="javascript:adicionaLista()" class="btn bnt-mini btn-danger">Excluir</a></cfoutput>
+											<cfoutput><a href="dropGrupo.cfm?Id=#grupo.getID_Grupo()#" class="btn bnt-mini btn-danger">Excluir</a></cfoutput>
 										<cfelse>
 											<!--- Dados de identifica&ccedil;&atilde;o a serem passados --->
 											<cfform name="formJoin#grupo.getId_Grupo()#" method="POST">
