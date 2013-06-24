@@ -43,33 +43,79 @@
   				<!-- Opçoes do menu -->
 	  			<ul class="nav">
 	  				<li class="divider-vertical"></li><!-- linha vertical divisora-->
-	  				<li class="active"><a href="#">Home</a></li>
-	  				
-	  				<li>
-						<!-- Label do dropdown -->
-		  					<a href="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown">
-		  						Filmes
-		  					</a>
-		  					
-		  					<!-- Opção do dropdown -->
-		  					<ul class="dropdown-menu" aria-labellely="dlabel">
-		  						<cfquery name="getGeneros" datasource="ds_Projeto_Filmes">
-									SELECT Id_Genero, Descricao FROM tbl_Genero
-								</cfquery>
-								<cfloop query="getGeneros" endRow="10">
-										<!--- Coloca como link o id do genero a ser pesquisado --->
-										<cfoutput><li><a href="Index.cfm?search=#Id_Genero#">#Descricao#</a></li></cfoutput>
-								</cfloop>
-		  					</ul></li>
-	  				
-	  				<li><a href="Grupos.cfm">Grupos</a></li>
-	  				
-	  				<li><a href="MinhaListaDesejo.cfm">Lista de Desejos</a></li>
-	  				
-	  				<li><a href="#">Sobre</a></li>
+	  				<cfswitch expression="#CGI.script_name#">
+					
+					<cfcase value="/Projeto_Filmes/Grupos.cfm">
+						<li><a href="index.cfm">Home</a></li>
+		  				<li>
+							<!-- Label do dropdown -->
+			  					<a href="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown">
+			  						Filmes
+			  					</a>
+			  					
+			  					<!-- Opção do dropdown -->
+			  					<ul class="dropdown-menu" aria-labellely="dlabel">
+			  						<cfquery name="getGeneros" datasource="ds_Projeto_Filmes">
+										SELECT Id_Genero, Descricao FROM tbl_Genero
+									</cfquery>
+									<cfloop query="getGeneros" endRow="10">
+											<!--- Coloca como link o id do genero a ser pesquisado --->
+											<cfoutput><li><a href="Index.cfm?search=#Id_Genero#">#Descricao#</a></li></cfoutput>
+									</cfloop>
+			  					</ul></li>
+		  				<li class="active"><a href="Grupos.cfm">Grupos</a></li>
+		  				<li><a href="MinhaListaDesejo.cfm">Lista de Desejos</a></li>
+					</cfcase>
+					
+					<cfcase value="/Projeto_Filmes/MinhaListaDesejo.cfm">
+						<li><a href="index.cfm">Home</a></li>
+		  				<li>
+							<!-- Label do dropdown -->
+			  					<a href="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown">
+			  						Filmes
+			  					</a>
+			  					
+			  					<!-- Opção do dropdown -->
+			  					<ul class="dropdown-menu" aria-labellely="dlabel">
+			  						<cfquery name="getGeneros" datasource="ds_Projeto_Filmes">
+										SELECT Id_Genero, Descricao FROM tbl_Genero
+									</cfquery>
+									<cfloop query="getGeneros" endRow="10">
+											<!--- Coloca como link o id do genero a ser pesquisado --->
+											<cfoutput><li><a href="Index.cfm?search=#Id_Genero#">#Descricao#</a></li></cfoutput>
+									</cfloop>
+			  					</ul></li>
+		  				<li><a href="Grupos.cfm">Grupos</a></li>
+		  				<li class="active"><a href="MinhaListaDesejo.cfm">Lista de Desejos</a></li>
+					</cfcase>
+					
+					
+					
+					<cfdefaultcase>
+		  				<li><a href="index.cfm">Home</a></li>
+		  				<li>
+							<!-- Label do dropdown -->
+			  					<a href="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown">
+			  						Filmes
+			  					</a>
+			  					
+			  					<!-- Opção do dropdown -->
+			  					<ul class="dropdown-menu" aria-labellely="dlabel">
+			  						<cfquery name="getGeneros" datasource="ds_Projeto_Filmes">
+										SELECT Id_Genero, Descricao FROM tbl_Genero
+									</cfquery>
+									<cfloop query="getGeneros" endRow="10">
+											<!--- Coloca como link o id do genero a ser pesquisado --->
+											<cfoutput><li><a href="Index.cfm?search=#Id_Genero#">#Descricao#</a></li></cfoutput>
+									</cfloop>
+			  					</ul></li>
+		  				<li><a href="Grupos.cfm">Grupos</a></li>
+		  				<li><a href="MinhaListaDesejo.cfm">Lista de Desejos</a></li>
+					</cfdefaultcase>
+					</cfswitch>
 	  			</ul>
 	  		
-  				<cfif GetAuthUser() NEQ "">	
+  				<cfif isUserLoggedin()>	
   					<!-- Dropdown para usuário logado -->
 		  			<ul class="nav pull-right">
 		  				<li class="dropdown">
@@ -81,11 +127,13 @@
 		  					</a>
 		  					
 		  					<!-- Opção do dropdown -->
-		  					<ul class="dropdown-menu" aria-labellely="dlabel">
-		  						<li><a href="#">Meu Perfil</a></li>
-		  						<li><a href="#">Favoritos</a></li>
-		  						<li><a href="index.cfm?logout">Sair</a></li>
-		  					</ul>
+		  					<cfoutput>
+			  					<ul class="dropdown-menu" aria-labellely="dlabel">
+			  						<li><a href="PerfilUsuario.cfm?Id=#user.getId_Usuario()#">Meu Perfil</a></li>
+			  						<li><a href="MinhaListaDesejo.cfm?Id=#user.getId_Usuario()#">Lista de Desejos</a></li>
+			  						<li><a href="index.cfm?logout">Sair</a></li>
+			  					</ul>
+		  					</cfoutput>
 		  				</li>
 		  			</ul>
 	  			<cfelse>

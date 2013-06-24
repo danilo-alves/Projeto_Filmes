@@ -111,7 +111,6 @@
 					
 					<!--- Carrega o embeb do banco de dados --->
 					<center><iframe width="560" height="315" src="http://www.youtube.com/embed/#dadosFilme.getTrailer()#" frameborder="0" allowfullscreen></iframe></center>
-
 				</div>
 			</cfoutput>
 
