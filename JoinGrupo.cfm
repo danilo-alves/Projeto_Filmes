@@ -7,7 +7,7 @@
 
 		<cfif isDefined('grupo') AND isDefined('user') AND isDefined('url.join')>
 
-			<!--- Caso o valor passado seja 1, adiciona ao grupo, caso contrário remove o usuario do grupo --->
+			<!--- Caso o valor passado seja 1, adiciona ao grupo, caso contr&aacute;rio remove o usuario do grupo --->
 			<cfif #url.join# EQ 1>
 				<cfset grupoJoin = EntityNew('Usuario_Grupo') />
 				<cfset grupoJoin.setGrupo(grupo) />
@@ -30,7 +30,7 @@
 				</div>	
 
 			<cfelse>
-				<!--- verifica se o usuário não é o criador do grupo --->
+				<!--- verifica se o usu&aacute;rio n&atilde;o é o criador do grupo --->
 				<cfif #grupo.getId_Usuario().getId_Usuario()# NEQ #user.getId_Usuario()#>
 					
 					<!--- obtem os registro com o usuario e grupo definidos --->
@@ -62,7 +62,7 @@
 				<a class="close" data-dismiss="alert" href="#">&times;</a>
 				<cfoutput>
 					<h5 class="alert-error">Erro ao adicionar-se ao grupo!</h5>
-					<p class="alert-error">Não foi poss&iacute;vel adicionar-se ao grupo '#grupo.getNome_Grupo()#'. Tente novamente!</p>
+					<p class="alert-error">N&atilde;o foi poss&iacute;vel adicionar-se ao grupo '#grupo.getNome_Grupo()#'. Tente novamente!</p>
 				</cfoutput>
 			</div>				
 		</cfif>

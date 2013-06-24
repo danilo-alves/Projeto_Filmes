@@ -1,4 +1,4 @@
-// Funções AJAx para avaliação de Filme
+// Fun&ccedil;ões AJAx para avalia&ccedil;&atilde;o de Filme
 // Data criacao: 16/06
 // Autor: Danilo
 

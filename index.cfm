@@ -1,4 +1,4 @@
-﻿<!--- Inclui o conteudo de cabeçalho padrão --->
+﻿<!--- Inclui o conteudo de cabe&ccedil;alho padr&atilde;o --->
 <cfinclude template="Header.cfm">
 
 <cfparam name="form.txtSearch" default=""/>
@@ -27,7 +27,7 @@
 				<a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
 				<div class="carousel-caption">
 					<h4>Game of Thrones</h4>
-					<p>Série Game of Thrones começa sua 3 temporada.</p>
+					<p>Série Game of Thrones come&ccedil;a sua 3 temporada.</p>
 				</div>
 			</div>
 			<!-- FIM CAROUSEL -->
@@ -57,7 +57,7 @@
 	    <!-- Corpo do site  -->
 	    <div class="row">
 	    	
-			<!--- Verifica se o usuário esta logado e oculta a barra de opcoes caso o usuário não esteja logado --->
+			<!--- Verifica se o usu&aacute;rio esta logado e oculta a barra de opcoes caso o usu&aacute;rio n&atilde;o esteja logado --->
 	    	<cfinclude template="CheckMenuBar.cfm">
 	    		
 	    		<!--- Exibe os resultados de busca somente quando é passado algum conteudo pelo campo de busca --->
@@ -65,7 +65,7 @@
 		    		<cfoutput><div class="#spanNum#"></cfoutput>
 		    		
 		    		 <cfif NOT isDefined('url.search')>
-						<h4>Você procurou por "<cfoutput>#form.txtSearch#</cfoutput>"</h4>
+						<h4>Voc&ecirc; procurou por "<cfoutput>#form.txtSearch#</cfoutput>"</h4>
 					<cfelse>
 						<cfset genero = EntityLoadByPk('Genero', #url.search#)>
 						<cfoutput><h4>Filmes de #genero.getDescricao()#</h4></cfoutput>
@@ -152,7 +152,7 @@
 												<img data-src="holder.js/260x160">
 											</cfif>
 										<cfcatch>
-											<!--- Exibe um thumbnail padrao caso não exista imagem --->
+											<!--- Exibe um thumbnail padrao caso n&atilde;o exista imagem --->
 											<img data-src="holder.js/260x160">
 										</cfcatch>
 									</cftry>
@@ -167,5 +167,5 @@
 	    	</div>
 	    </div>
 
-<!--- Inclui o conteudo de rodapé padrão --->
+<!--- Inclui o conteudo de rodapé padr&atilde;o --->
 <cfinclude template="Footer.cfm">

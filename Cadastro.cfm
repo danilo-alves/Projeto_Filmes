@@ -1,6 +1,6 @@
 ﻿<cfinclude template="Header.cfm">
 
-<!---Se os avalores não estiverem definidos, define com uma strign vazia --->
+<!---Se os avalores n&atilde;o estiverem definidos, define com uma strign vazia --->
 <cfparam name="form.inputNome" default="">
 <cfparam name="form.inputEmail" default="">
 <cfparam name="form.inputSenha" default="">
@@ -8,7 +8,7 @@
 <cfparam name="form.fileData" default="">
 <cfparam name="form.txtDesc" default="">
 
-<!--- Avisos para os campso do formulário --->
+<!--- Avisos para os campso do formul&aacute;rio --->
 <cfparam name="emailError" default="">
 <cfparam name="passwordError" default="">
 
@@ -16,7 +16,7 @@
 	<cfif isDefined('url.Id')>
 		<cfset userUpd = EntityLoadByPK('Usuario', #url.Id#) >
 
-		<!--- Habilita o modo de edição --->
+		<!--- Habilita o modo de edi&ccedil;&atilde;o --->
 		<cfif userUpd.getEmail() EQ user.getEmail()>
 			<cfset editEnabled = "true">
 		<cfelse>
@@ -35,7 +35,7 @@
 		<cfif(arrayLen(emailUser) NEQ 0) AND NOT isDefined('editEnabled')>
 			<cfset emailError="error" >
 		<cfelse>
-			<!--- // Verifica se ambas as senhas são iguais --->
+			<!--- // Verifica se ambas as senhas s&atilde;o iguais --->
 			<cfif(form.inputSenha NEQ form.inputSenha2) >
 				<cfset passwordError="error"/>
 			<cfelse>
@@ -51,15 +51,15 @@
 				<cfset novoUsuario.setNOME(form.inputNome) />
 				<cfset novoUsuario.setDescricao(form.txtDesc) />
 				
-				<!--- <cfset entitySave(novoUsuario) /> --->
+				<cfset entitySave(novoUsuario) />
 
-				<!--- // obtem o id do novo usuário para utilizar na criaçao do diretório --->
+				<!--- // obtem o id do novo usu&aacute;rio para utilizar na cria&ccedil;ao do diretório --->
 				<cfset userId = novoUsuario.getId_Usuario() />
 				
 				<cfif NOT isDefined('editEnabled')>
-					<!--- // Cria uma pasta com o nome do usuário --->
+					<!--- // Cria uma pasta com o nome do usu&aacute;rio --->
 					<cfset basePath = ExpandPath("./UserData/") />
-					<cfset newDirectory = "USER#userID#" />
+					<cfset newDirectory = "USER#novoUsuario.getId_Usuario()#" />
 					<cfset newDirectoryPath =  "#basePath#" & "#newDirectory#" />
 					<cfif(NOT DirectoryExists(newDirectoryPath)) >
 						<cftry>
@@ -86,7 +86,7 @@
 				</cfif>
 				<cfset imgCapa.setId_Usuario(novoUsuario) >
 				<cfset imgCapa.setImagem_Path(#imgCapaPath#) > 
-				<!--- <cfset EntitySave(imgCapa) > --->
+				<cfset EntitySave(imgCapa) >
 
 				<cfflush>
 				
@@ -126,7 +126,7 @@
 		<cfoutput>
 		<cfform class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
 			<fieldset>
-				<legend>Informações para Cadastro</legend>
+				<legend>Informa&ccedil;ões para Cadastro</legend>
 				<div class="control-group">
 					<label class="control-label" for="inputNome">Nome</label>
 					<div class="controls">
@@ -141,9 +141,9 @@
 					<label class="control-label" for="inputEmail">Email</label>
 					<div class="controls">
 						<cfif NOT isDefined('editEnabled')>
-							<cfinput name="inputEmail" type="email" required="true" class="input-xlarge" placeholder="Informe seu email" message="Email já existente">
+							<cfinput name="inputEmail" type="email" required="true" class="input-xlarge" placeholder="Informe seu email" message="Email j&aacute; existente">
 						<cfelse>
-							<cfinput name="inputEmail" type="email" required="true" class="input-xlarge" placeholder="Informe seu email" message="Email já existente" value="#user.getEmail()#" disabled="true">
+							<cfinput name="inputEmail" type="email" required="true" class="input-xlarge" placeholder="Informe seu email" message="Email j&aacute; existente" value="#user.getEmail()#" disabled="true">
 						</cfif>
 					</div>
 				</div>

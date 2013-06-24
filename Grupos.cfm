@@ -1,7 +1,7 @@
-<!--- Inclui o conteudo de cabeçalho padrão --->
+<!--- Inclui o conteudo de cabe&ccedil;alho padr&atilde;o --->
 <cfinclude template="Header.cfm">
 	
-<!--- Necessário para formulário Ajax --->
+<!--- Necess&aacute;rio para formul&aacute;rio Ajax --->
 <cfajaximport/>
 <script  src="joinGrupoAction.js"></script>
 
@@ -28,14 +28,14 @@
 					<!--- Verifica se o visitante da pagina de filme é o criador e entao permite a edicao --->
 					<cfset userCriador = grupo.getId_Usuario()>
 
-					<!--- Habilita o modo de edição --->
+					<!--- Habilita o modo de edi&ccedil;&atilde;o --->
 					<cfif userCriador.getEmail() EQ user.getEmail()>
 						<cfset editEnabled = "true">
 					<cfelse>
 						<cfset editEnabled = "false">
 					</cfif>
 
-					<!--- obtem os usuários pertencentes ao grupo --->
+					<!--- obtem os usu&aacute;rios pertencentes ao grupo --->
 					<cfset usersGrupo = EntityLoad("Usuario_Grupo", {Grupo = #grupo#}) />
 
 					<div class="media">
@@ -59,14 +59,14 @@
 										<p>#Mid(grupo.getDescricao(), 1, 350)#...</p>
 									</div>
 									<div class="span4">
-										<!--- Verifica se o usuário já participa deste grupo ocultando ou não o botão de participe, caso
+										<!--- Verifica se o usu&aacute;rio j&aacute; participa deste grupo ocultando ou n&atilde;o o bot&atilde;o de participe, caso
 										contrario oferece a opcao de sair do grupo --->
 										<cfset isMember = EntityLoad('Usuario_Grupo', {Grupo = #grupo#, Usuario = #user#})>
 										<cfif #editEnabled#>
 											<cfoutput><p><a href="addGrupo.cfm?Id=#grupo.getID_Grupo()#" class="btn bnt-mini btn-warning">Editar</a></p></cfoutput>
 											<cfoutput><a href="javascript:adicionaLista()" class="btn bnt-mini btn-danger">Excluir</a></cfoutput>
 										<cfelse>
-											<!--- Dados de identificação a serem passados --->
+											<!--- Dados de identifica&ccedil;&atilde;o a serem passados --->
 											<cfform name="formJoin#grupo.getId_Grupo()#" method="POST">
 												<cfinput name="id_grupo" type="hidden" required="true" value="#grupo.getId_Grupo()#"/>								
 												<cfinput name="id_user" type="hidden" required="true" value="#user.getId_Usuario()#"/>								
@@ -87,7 +87,7 @@
 				</cfloop>
 			<cfelse>
 				<div class="alert alert-warning">
-					<p class="lead=">Não há grupos. <a href="AddGrupo.cfm">Adicionar</a></p>
+					<p class="lead=">N&atilde;o h&aacute; grupos. <a href="AddGrupo.cfm">Adicionar</a></p>
 				</div>
 			</cfif>
 	</div>
@@ -98,5 +98,5 @@
 		<p>Fa&ccedil;a o login ou <a href="Cadastro.cfm?prevPage=AddFilme.cfm">cadastre-se</a> agora. &Eacute; simples!</p>
 	</div> 
 </cfif>
-<!--- Inclui o conteudo de rodapé padrão --->
+<!--- Inclui o conteudo de rodapé padr&atilde;o --->
 <cfinclude template="Footer.cfm">

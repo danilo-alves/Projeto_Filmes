@@ -33,19 +33,19 @@
 				<p class="lead">#GetAuthUser()# em #DateFormat(Now())#</p>
 				<p>Nota; #form.Nota#</p>
 				<p>#form.txtAvaliacao#</p>
-				<p><a class="btn btn-success">Gostei!</a>	<a class="btn btn-danger">Não Gostei!</a></p>
+				<p><a class="btn btn-success">Gostei!</a>	<a class="btn btn-danger">N&atilde;o Gostei!</a></p>
 			</div>
 		</cfoutput> --->
 
 		<!--- Envia os dados modificados ou adicionais para a base de dados --->
-		<!--- Caso esta tag não seja especificada o ColdFusion ORM atualiza automaticamente em um determinado tempo --->
+		<!--- Caso esta tag n&atilde;o seja especificada o ColdFusion ORM atualiza automaticamente em um determinado tempo --->
 		<cfflush>
 	<cfcatch>
-		<p>Não foi possível avaliar este filme. Tente novamente.</p>
+		<p>N&atilde;o foi possível avaliar este filme. Tente novamente.</p>
 	</cfcatch>
 	</cftry>
 <cfelse>
 	<div class="alert warning-alert">
-		<p class="alert warning-alert">Faca o login para poder dar sua opinião ou cadastre-se aqui</p>
+		<p class="alert warning-alert">Faca o login para poder dar sua opini&atilde;o ou cadastre-se aqui</p>
 	</div>
 </cfif>

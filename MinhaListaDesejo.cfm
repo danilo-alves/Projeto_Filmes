@@ -1,4 +1,4 @@
-<!--- Inclui o conteudo de cabeçalho padrão --->
+<!--- Inclui o conteudo de cabe&ccedil;alho padr&atilde;o --->
 <cfinclude template="Header.cfm">
 	
 <cfif getAuthUser() NEQ "">		
@@ -10,7 +10,7 @@
     	<!-- spanN em que N se refere ao numero de colunas, Maximo de 12 colunas -->
     	<cfinclude template="MenuBar.cfm"> <!--- Inclui a barra de menus --->
 
-		<!--- Retorna um array com os filmes criados por determinado usuário --->
+		<!--- Retorna um array com os filmes criados por determinado usu&aacute;rio --->
 		<cfset listaDesejo = user.getListaFilmes()/>
 		<!--- <cfdump var="#listaDesejo#"> --->
     	<div class="span10">
@@ -41,16 +41,16 @@
 				</cfloop>
 			<cfelse>
 				<div class="alert alert-warning">
-					<p class="lead=">Não há filmes adicionados por você. <a href="AddFilme.cfm">Adicionar</a></p>
+					<p class="lead=">N&atilde;o h&aacute; filmes adicionados por voc&ecirc;. <a href="AddFilme.cfm">Adicionar</a></p>
 				</div>
 			</cfif>
 	</div>
 <cfelse>
 	<!--- Redireciona para a pagina de cadastro --->
 	<div class='alert alert-warning'>
-		<h3>Usuário não autenticado!</h3>
-		<p>Faça o login ou <a href="Cadastro.cfm?prevPage=AddFilme.cfm">cadastre-se</a> agora. É simples!</p>
+		<h3>Usu&aacute;rio n&atilde;o autenticado!</h3>
+		<p>Fa&ccedil;a o login ou <a href="Cadastro.cfm?prevPage=AddFilme.cfm">cadastre-se</a> agora. É simples!</p>
 	</div> 
 </cfif>
-<!--- Inclui o conteudo de rodapé padrão --->
+<!--- Inclui o conteudo de rodapé padr&atilde;o --->
 <cfinclude template="Footer.cfm">

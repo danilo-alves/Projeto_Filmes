@@ -9,7 +9,7 @@ YUI.add('text-accentfold', function (Y, NAME) {
 
 /**
  * Provides a basic accent folding implementation that converts common accented
- * letters (like "á") to their non-accented forms (like "a").
+ * letters (like "&aacute;") to their non-accented forms (like "a").
  *
  * @module text
  * @submodule text-accentfold
@@ -18,7 +18,7 @@ YUI.add('text-accentfold', function (Y, NAME) {
 /**
  * <p>
  * Provides a basic accent folding implementation that converts common accented
- * letters (like "á") to their non-accented forms (like "a").
+ * letters (like "&aacute;") to their non-accented forms (like "a").
  * </p>
  *
  * <p>

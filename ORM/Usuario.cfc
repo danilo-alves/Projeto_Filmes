@@ -6,7 +6,7 @@
 	<cfproperty name="Senha" type="string" required="true">
 	<cfproperty name="Descricao" type="string" required="false" sqltype="VARCHAR(2000)">
 	<!---Relacionamento muito para muitos --->
-	<!--- As chaves primária de Usuario e Grupo serão chave estrangeira da tabela Usuario_Grupo --->
+	<!--- As chaves prim&aacute;ria de Usuario e Grupo ser&atilde;o chave estrangeira da tabela Usuario_Grupo --->
 	<!--- <cfproperty name="Id_Grupo" 
 			   	fieldtype="many-to-many" 
 			   	CFC="Grupo" 
@@ -27,7 +27,7 @@
 				cascade="all">
  --->
 
-	<!--- Obtem os filmes criados pelo usuário --->
+	<!--- Obtem os filmes criados pelo usu&aacute;rio --->
 	<cffunction name="getFilmeByUser">
 		<cfargument name="userSearch"/>
 
@@ -41,7 +41,7 @@
 	<cffunction name="getListaFilmes">
 		<cfargument name="userSearch"/>
 
-		<!--- Caso não seja especificado nenhum arametro utiliza o usuário logado  --->
+		<!--- Caso n&atilde;o seja especificado nenhum arametro utiliza o usu&aacute;rio logado  --->
 		<cfif NOT isDefined('userSearch') OR userSearch EQ NULL>
 			<cfset userSearch = this/>
 		</cfif>

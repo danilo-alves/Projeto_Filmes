@@ -22,7 +22,7 @@
 				
 				
 	<!--- Métodos --->
-	<cffunction name="filmeExists" hint="Função com retorno tipo Bool que retorna TRUE se há um filme existente" returntype="boolean">
+	<cffunction name="filmeExists" hint="Fun&ccedil;&atilde;o com retorno tipo Bool que retorna TRUE se h&aacute; um filme existente" returntype="boolean">
 		<cfargument name="tituloFilme" />
 		
 		<cfset filme = EntityLoad('Filme', {Titulo="#tituloFilme#"}) />

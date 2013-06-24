@@ -1,11 +1,11 @@
-// Funções AJAx para avaliação de Filme
+// Fun&ccedil;ões AJAx para avalia&ccedil;&atilde;o de Filme
 // Data criacao: 16/06
 // Autor: Danilo
 
 function submitJoin(idgrupo, join) {
 	var urlString = 'JoinGrupo.cfm?join=' + join;
 	
-	// passa os dados do formulário de acordo com o id do grupo
+	// passa os dados do formul&aacute;rio de acordo com o id do grupo
 	var formName = 'formJoin' + idgrupo;
 	formName = formName.trim();
 

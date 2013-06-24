@@ -1,4 +1,4 @@
-<!--- Inclui o conteudo de cabeçalho padrão --->
+<!--- Inclui o conteudo de cabe&ccedil;alho padr&atilde;o --->
 <cfinclude template="Header.cfm">
 
 	<!--- X-Editable plugin --->
@@ -10,7 +10,7 @@
 	<cfparam name="imgCapa" default=""> 
 	<cfparam name="editEnabled" default="false">
 	
-	<!--- Necessário para formulário Ajax --->
+	<!--- Necess&aacute;rio para formul&aacute;rio Ajax --->
 	<cfajaximport/>
 
   	<!--- Avaliacao de filme utilizando Ajax --->
@@ -35,7 +35,7 @@
 			<cfset userCriador = dadosFilme.getId_Usuario()>
 			<cfset user = EntityLoad('Usuario', {Email=getAuthUser()}, true)>
 
-			<!--- Habilita o modo de edição --->
+			<!--- Habilita o modo de edi&ccedil;&atilde;o --->
 			<cfif userCriador.getEmail() EQ user.getEmail()>
 				<cfset editEnabled = "true">
 			<cfelse>
@@ -56,7 +56,7 @@
 				</div>
 
 		<cfcatch>
-			<!--- Exibe um thumbnail padrao caso não exista imagem --->
+			<!--- Exibe um thumbnail padrao caso n&atilde;o exista imagem --->
 			<div class="span10">
 	    		<div class="span2" style="float: left">
 					<img data-src="holder.js/260x160">
@@ -124,13 +124,13 @@
 	    		<div id="myModal" class="modal hide fade">
 				    <div class="modal-header">
 				    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				    	<h3>Avaliação</h3>
+				    	<h3>Avalia&ccedil;&atilde;o</h3>
 				    </div>
 				    <cfform name="formAvaliacao" method="POST" >
 				    	<div class="modal-body">	
 				    		<cftextarea name="txtAvaliacao" required="true" maxlength="300" height="300" width="300"/>	
 				    		<hr/>
-				    		<p>Avaliação</p>
+				    		<p>Avalia&ccedil;&atilde;o</p>
 				    		<cfinput name="Nota" type="radio" value="1" />
 				    		<cfinput name="Nota" type="radio" value="2" />
 				    		<cfinput name="Nota" type="radio" value="3" />
@@ -155,17 +155,17 @@
 									<p>#aval.getCritica()#</p>
 									<cfform id="hero_#aval.getId_Avaliacao()#" name="formPont">
 										<cfinput name="id" type="hidden" value="#aval.getId_Avaliacao()#"/>
-										<p><a class="btn btn-success" href="javascript:submitPont(1,'#isUserLoggedin()#')">Gostei!</a>       <a class="btn btn-danger" href="javascript:submitPont(0,'#isUserLoggedin()#')">Não Gostei!</a></p>
+										<p><a class="btn btn-success" href="javascript:submitPont(1,'#isUserLoggedin()#')">Gostei!</a>       <a class="btn btn-danger" href="javascript:submitPont(0,'#isUserLoggedin()#')">N&atilde;o Gostei!</a></p>
 									</cfform>
 								</div>								
 							</cfoutput>
 						</cfloop>
 					<cfelse>
-						<cfoutput><p class="lead">Não há avaliações deste filme ainda, seja o primeiro a dar uma opinião.</p></cfoutput>
+						<cfoutput><p class="lead">N&atilde;o h&aacute; avalia&ccedil;ões deste filme ainda, seja o primeiro a dar uma opini&atilde;o.</p></cfoutput>
 					</cfif>
 			</div>
     	</div>
     </div>
 
-<!--- Inclui o conteudo de rodapé padrão --->
+<!--- Inclui o conteudo de rodapé padr&atilde;o --->
 <cfinclude template="Footer.cfm">

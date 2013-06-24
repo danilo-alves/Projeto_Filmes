@@ -1,7 +1,7 @@
-<!--- Inclui o conteudo de cabeçalho padrão --->
+<!--- Inclui o conteudo de cabe&ccedil;alho padr&atilde;o --->
 <cfinclude template="Header.cfm">
 
-<!--- Necessário para formulário Ajax --->
+<!--- Necess&aacute;rio para formul&aacute;rio Ajax --->
 <cfajaximport/>
 <script  src="joinGrupoAction.js"></script>
 
@@ -12,7 +12,7 @@
 <!--- <cfdump var="#getGrupo#">
 <cfdump var="#grupo#"> --->
 
-<!--- Caso não receba o Id do grupo como parametro redireciona para a pagina que lista os grupos  --->
+<!--- Caso n&atilde;o receba o Id do grupo como parametro redireciona para a pagina que lista os grupos  --->
 <cfif NOT isDefined('url.Id') OR NOT isDefined('grupo')>
 	<cflocation url="Grupos.cfm"/>
 </cfif>
@@ -22,7 +22,7 @@
 	<cfset userCriador = grupo.getId_Usuario()>
 	<cfset user = EntityLoad('Usuario', {Email=getAuthUser()}, true)>
 
-	<!--- Habilita o modo de edição --->
+	<!--- Habilita o modo de edi&ccedil;&atilde;o --->
 	<cfif userCriador.getEmail() EQ user.getEmail()>
 		<cfset editEnabled = "true">
 	<cfelse>
@@ -53,7 +53,7 @@
 				<cfimage action="writeToBrowser" source="#imgCapa.getImagem_Path()#" height="50%" width="50%">
 			</div>
 		<cfelse>
-			<!--- Exibe um thumbnail padrao caso não exista imagem --->
+			<!--- Exibe um thumbnail padrao caso n&atilde;o exista imagem --->
 	    		<div class="span2" style="float: left">
 					<img data-src="holder.js/160x160">
 				</div>
@@ -63,7 +63,7 @@
 		<div class="span7">
 			<h2>#grupo.getNome_Grupo()#</h2>
 			<p>#arrayLen(membrosGrupo)# membro(s) cadastrado neste grupo</p>
-			<!--- Verifica se o usuário já participa deste grupo ocultando ou não o botão de participe, caso
+			<!--- Verifica se o usu&aacute;rio j&aacute; participa deste grupo ocultando ou n&atilde;o o bot&atilde;o de participe, caso
 			contrario oferece a opcao de sair do grupo --->
 			<cfset isMember = EntityLoad('Usuario_Grupo', {Grupo = #grupo#, Usuario = #user#})>
 		</div>				
@@ -73,7 +73,7 @@
 				<p><a href="addGrupo.cfm?Id=#grupo.getId_Grupo()#" class="btn bnt-mini btn-warning">Editar</a></p>
 				<a href="javascript:adicionaLista(#grupo.getId_Grupo()#)" class="btn bnt-mini btn-danger">Excluir</a>
 			<cfelse>
-				<!--- Dados de identificação a serem passados --->
+				<!--- Dados de identifica&ccedil;&atilde;o a serem passados --->
 				<cfform name="formJoin#grupo.getId_Grupo()#" method="POST">
 					<cfinput name="id_grupo" type="hidden" required="true" value="#grupo.getId_Grupo()#"/>								
 					<cfinput name="id_user" type="hidden" required="true" value="#user.getId_Usuario()#"/>								
@@ -120,5 +120,5 @@
 	</div>
 	</cfoutput>
 </div>
-<!--- Inclui o conteudo de rodapé padrão --->
+<!--- Inclui o conteudo de rodapé padr&atilde;o --->
 <cfinclude template="Footer.cfm">

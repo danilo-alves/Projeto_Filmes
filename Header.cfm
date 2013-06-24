@@ -30,7 +30,7 @@
   			<!-- Nome do Projeto ou Logo -->
   			<a class="brand" href="index.cfm">Projeto Untitled</a>
   			
-  			<!-- Botão com 3 barras que irá aparecer em dispositivos com tela menor -->
+  			<!-- Bot&atilde;o com 3 barras que ir&aacute; aparecer em dispositivos com tela menor -->
   			<!-- HINT: Para testar no desktop redimensione a janela do navegador -->
   			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
   				<span class="icon-bar"></span>
@@ -38,9 +38,9 @@
   				<span class="icon-bar"></span>
   			</a>
   			
-  			<!-- Parte do menu superior que será oculto em telas menores -->
+  			<!-- Parte do menu superior que ser&aacute; oculto em telas menores -->
   			<div class="nav-collapse collapse">
-  				<!-- Opçoes do menu -->
+  				<!-- Op&ccedil;oes do menu -->
 	  			<ul class="nav">
 	  				<li class="divider-vertical"></li><!-- linha vertical divisora-->
 	  				<cfswitch expression="#CGI.script_name#">
@@ -53,7 +53,7 @@
 			  						Filmes
 			  					</a>
 			  					
-			  					<!-- Opção do dropdown -->
+			  					<!-- Op&ccedil;&atilde;o do dropdown -->
 			  					<ul class="dropdown-menu" aria-labellely="dlabel">
 			  						<cfquery name="getGeneros" datasource="ds_Projeto_Filmes">
 										SELECT Id_Genero, Descricao FROM tbl_Genero
@@ -75,7 +75,7 @@
 			  						Filmes
 			  					</a>
 			  					
-			  					<!-- Opção do dropdown -->
+			  					<!-- Op&ccedil;&atilde;o do dropdown -->
 			  					<ul class="dropdown-menu" aria-labellely="dlabel">
 			  						<cfquery name="getGeneros" datasource="ds_Projeto_Filmes">
 										SELECT Id_Genero, Descricao FROM tbl_Genero
@@ -99,7 +99,7 @@
 			  						Filmes
 			  					</a>
 			  					
-			  					<!-- Opção do dropdown -->
+			  					<!-- Op&ccedil;&atilde;o do dropdown -->
 			  					<ul class="dropdown-menu" aria-labellely="dlabel">
 			  						<cfquery name="getGeneros" datasource="ds_Projeto_Filmes">
 										SELECT Id_Genero, Descricao FROM tbl_Genero
@@ -116,7 +116,7 @@
 	  			</ul>
 	  		
   				<cfif isUserLoggedin()>	
-  					<!-- Dropdown para usuário logado -->
+  					<!-- Dropdown para usu&aacute;rio logado -->
 		  			<ul class="nav pull-right">
 		  				<li class="dropdown">
 		  					<!-- Label do dropdown -->
@@ -126,7 +126,7 @@
 		  						<b class="caret"></b>
 		  					</a>
 		  					
-		  					<!-- Opção do dropdown -->
+		  					<!-- Op&ccedil;&atilde;o do dropdown -->
 		  					<cfoutput>
 			  					<ul class="dropdown-menu" aria-labellely="dlabel">
 			  						<li><a href="PerfilUsuario.cfm?Id=#user.getId_Usuario()#">Meu Perfil</a></li>
@@ -139,9 +139,9 @@
 	  			<cfelse>
 				  	
 		  			<!--- Formulario de login na barra de menu --->
-					<!--- Esta form irá executar por meio do atributo action esta mesma pagina (CGI.script_name) --->
-					<!--- A verificação do usuário e o login é efetuado no método OnRequestStart que é executado a cada
-						nova requisição de carregamento de qualquer página --->
+					<!--- Esta form ir&aacute; executar por meio do atributo action esta mesma pagina (CGI.script_name) --->
+					<!--- A verifica&ccedil;&atilde;o do usu&aacute;rio e o login é efetuado no método OnRequestStart que é executado a cada
+						nova requisi&ccedil;&atilde;o de carregamento de qualquer p&aacute;gina --->
 		  			<cfform class="navbar-search pull-right form-inline" method="POST" action="#CGI.script_name#?#CGI.query_string#">
 					  	<a href="Cadastro.cfm">Cadastre-se</a>
 		  				<cfinput name="j_username" type="email" class="input-medium" placeholder="Email" required="true">

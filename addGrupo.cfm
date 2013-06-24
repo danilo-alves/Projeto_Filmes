@@ -7,9 +7,9 @@
 
 <cfparam name="tituloErro" default="">
 
-<!--- Verifica se o usuário esta logado para poder cadastrar o filme
+<!--- Verifica se o usu&aacute;rio esta logado para poder cadastrar o filme
 	isUserLoggedin é uma fun&ccedil;&atilde;o do módulo de autentica&ccedil;&atilde;o do ColdFusion.
-	Caso contrário redireciona o usuário para a pagina de cadastro --->
+	Caso contr&aacute;rio redireciona o usu&aacute;rio para a pagina de cadastro --->
 <cfif isUserLoggedin() >
 	<cfif isDefined("url.Id")>
 
@@ -25,7 +25,7 @@
 	</cfif>
 
 	<!--- <cftry> --->
-		<!--- // Condicao satisfeita somente quando o formulário é enviado via POST contendo os dados do formulário --->
+		<!--- // Condicao satisfeita somente quando o formul&aacute;rio é enviado via POST contendo os dados do formul&aacute;rio --->
 		<cfif isDefined('form.btnCadastrar')>
 			<cfif NOT isDefined('editEnabled')>
 				<cfset novoGrupo = entityNew('Grupo') />
@@ -33,7 +33,7 @@
 				<cfset novoGrupo = dadosGrupo>
 			</cfif>
 			
-			<!--- // Verifica se já existe um filme com mesmo titulo --->
+			<!--- // Verifica se j&aacute; existe um filme com mesmo titulo --->
 			<cfif novoGrupo.grupoExiste('#form.inputGrupo#') AND NOT isDefined('editEnabled')>
 				<cfset tituloErro = "error" />
 			<cfelse>
@@ -52,7 +52,7 @@
 					<cfset ormFlush('ds_Projeto_Filme') />
 					
 					<!--- //writeDump(form); --->
-					<!--- // Cria uma pasta com o nome do usuário --->
+					<!--- // Cria uma pasta com o nome do usu&aacute;rio --->
 					<!--- ExpandPath obtem o caminho completo para a diretório do projeto na pasta de imagens --->
 					<cfset basePath = ExpandPath("/Projeto_Filmes/UserData/User#user.getId_Usuario()#/") />
 						<cftry>
@@ -175,7 +175,7 @@
 <cfelse>
 	<!--- Redireciona para a pagina de cadastro --->
 	<div class='alert alert-warning'>
-		<h3>Usuário n&atilde;o autenticado!</h3>
+		<h3>Usu&aacute;rio n&atilde;o autenticado!</h3>
 		<p>Fa&ccedil;a o login ou <a href="Cadastro.cfm?prevPage=AddFilme.cfm">cadastre-se</a> agora. É simples!</p>
 	</div> 
 </cfif>

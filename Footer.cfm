@@ -8,7 +8,7 @@
 			</div>
 		
 	</div>
-    <!-- Incluir javascripts no final das páginas para melhorar o carregamento
+    <!-- Incluir javascripts no final das p&aacute;ginas para melhorar o carregamento
     	do conteúdo  -->
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="assets/js/bootstrap.js"></script>
